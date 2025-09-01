@@ -1,0 +1,1196 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Investigacion &#8212; Segundo Corte Primer actividad</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Investigacion';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Implementacion Del ejercicio" href="Implementacion_ejercicio.html" />
+    <link rel="prev" title="Presentacion" href="intro.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/logoUN.png" class="logo__image only-light" alt="Segundo Corte Primer actividad - Home"/>
+    <script>document.write(`<img src="_static/logoUN.png" class="logo__image only-dark" alt="Segundo Corte Primer actividad - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Presentacion
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Investigacion</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="Implementacion_ejercicio.html">Implementacion Del ejercicio</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2FInvestigacion.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/Investigacion.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Investigacion</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Investigacion</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#naturaleza-de-las-series-de-tiempo">Naturaleza de las series de tiempo</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tipos-de-datos-faltantes-en-una-serie-de-tiempo">Tipos de datos faltantes en una serie de tiempo</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#estrategias-de-imputacion-para-series-de-tiempo">Estrategias de imputacion para series de tiempo</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gaps">Gaps</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#que-es-un-gap">¿Que es un Gap?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#caracterizacion-general-de-los-gaps">Caracterización general de los gaps</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#clasificacion-de-gaps">Clasificacion de gaps</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#implementacion">Implementacion</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#librerias-usadas">Librerias usadas</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#funciones-usadas">Funciones usadas</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cargado-y-revision-de-datos">Cargado y revision de datos</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-exploratorio-de-datos-eda">Analisis Exploratorio de datos(EDA)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#clasificacion-de-datos-faltantes">Clasificacion de datos faltantes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tratamiento-de-datos-faltantes">Tratamiento de datos faltantes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#verificacion-final-de-los-datos">verificacion final de los datos</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1"></a></li>
+</ul>
+</li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="investigacion">
+<h1>Investigacion<a class="headerlink" href="#investigacion" title="Link to this heading">#</a></h1>
+<section id="naturaleza-de-las-series-de-tiempo">
+<h2>Naturaleza de las series de tiempo<a class="headerlink" href="#naturaleza-de-las-series-de-tiempo" title="Link to this heading">#</a></h2>
+<p>Una serie de tiempo no es simplemente “datos con fechas”, sino una secuencia ordenada en el tiempo donde:</p>
+<ul class="simple">
+<li><p>Existe dependencia temporal (los valores pasados influyen en los futuros).</p></li>
+<li><p>Puede haber estacionalidad (patrones que se repiten, ej. consumo eléctrico diario).</p></li>
+<li><p>El orden es fundamental: a diferencia de un dataset tabular normal, no puedes barajar los datos sin perder estructura.</p></li>
+</ul>
+<p>Cuando imputamos valores, no podemos tratarlos como faltantes aleatorios de cualquier dataset, porque romperíamos la coherencia temporal.</p>
+</section>
+<section id="tipos-de-datos-faltantes-en-una-serie-de-tiempo">
+<h2>Tipos de datos faltantes en una serie de tiempo<a class="headerlink" href="#tipos-de-datos-faltantes-en-una-serie-de-tiempo" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Faltantes puntuales (missing at random) → un par de días, minutos o registros sueltos.</p></li>
+<li><p>Faltantes consecutivos cortos (gaps) → huecos de algunos periodos.</p></li>
+<li><p>Faltantes largos (bloques enteros) → días, semanas o meses completos sin datos.</p></li>
+<li><p>Inicio o fin truncado → cuando la serie no arranca o termina de manera completa.</p></li>
+</ul>
+<p>Cada tipo requiere una estrategia distinta.</p>
+</section>
+<section id="estrategias-de-imputacion-para-series-de-tiempo">
+<h2>Estrategias de imputacion para series de tiempo<a class="headerlink" href="#estrategias-de-imputacion-para-series-de-tiempo" title="Link to this heading">#</a></h2>
+<p><strong>Métodos simples</strong>
+Forward Fill (ffill): rellenar con el último valor conocido.
+✅ Bueno para datos estables (ej. sensores).
+❌ Puede crear sesgo si hay tendencia.
+Backward Fill (bfill): usar el siguiente valor disponible.
+Similar limitación que ffill.</p>
+<p><strong>Interpolación temporal</strong>
+Lineal: conecta los puntos vecinos.
+Polinómica / spline: suaviza, útil cuando la curva es continua.
+Interpolación basada en tiempo: ajusta tomando en cuenta los intervalos.
+✅ Útil cuando la serie es continua.
+❌ No funciona bien con estacionalidad marcada.</p>
+<p><strong>Métodos basados en estacionalidad y tendencia</strong>
+Descomposición (STL, aditiva/multiplicativa): separar tendencia, estacionalidad y residuales, imputar en cada componente y recomponer.
+Mean/Median por temporada: reemplazar por la media del mismo día/hora en otros periodos.
+Ej: faltó el lunes 3pm → reemplazar por el promedio de todos los lunes a las 3pm.</p>
+<p><strong>Modelos estadísticos clásicos</strong>
+ARIMA / SARIMA: entrenar un modelo autorregresivo y predecir los valores faltantes.
+Kalman Smoothing (State Space Models): muy robusto para imputar porque maneja ruido y tendencia.
+✅ Más sofisticado, conserva propiedades de la serie.</p>
+<p><strong>Métodos de Machine Learning / Deep Learning</strong>
+KNN Imputer temporal: busca patrones en ventanas similares.
+Random Forests o XGBoost: usa variables rezagadas (lags) y exógenas para predecir valores faltantes.
+Redes Neuronales Recurrentes (LSTM, GRU): aprenden dependencias largas en el tiempo.
+✅ Muy potentes para huecos grandes.
+❌ Requieren más datos y recursos.</p>
+</section>
+<section id="gaps">
+<h2>Gaps<a class="headerlink" href="#gaps" title="Link to this heading">#</a></h2>
+<section id="que-es-un-gap">
+<h3>¿Que es un Gap?<a class="headerlink" href="#que-es-un-gap" title="Link to this heading">#</a></h3>
+<p>Un gap es un hueco o intervalo de datos faltantes en una serie temporal. Puede ser:</p>
+<ul class="simple">
+<li><p>Pequeño y puntual: faltan 1 o pocos registros aislados.</p></li>
+<li><p>Corto y consecutivo: faltan varios registros seguidos, pero de poca longitud relativa.</p></li>
+<li><p>Largo: un bloque extenso de valores faltantes.</p></li>
+<li><p>Irregular/recurrente: aparecen muchos gaps en diferentes partes de la serie.</p></li>
+</ul>
+<p>La clave es que un gap rompe la continuidad de la serie y puede distorsionar el análisis si no se maneja.</p>
+</section>
+<section id="caracterizacion-general-de-los-gaps">
+<h3>Caracterización general de los gaps<a class="headerlink" href="#caracterizacion-general-de-los-gaps" title="Link to this heading">#</a></h3>
+<p>Un gap puede caracterizarse con tres dimensiones:</p>
+<ul class="simple">
+<li><p>Longitud absoluta</p></li>
+<li><ul>
+<li><p>Número de periodos consecutivos que faltan (ej: 5 horas en una serie horaria).</p></li>
+</ul>
+</li>
+<li><p>Longitud relativa (ratio)</p></li>
+<li><ul>
+<li><p>Respecto al periodo estacional s (ej: faltan 12 horas en una serie horaria con s=24 → 0.5).</p></li>
+</ul>
+</li>
+<li><ul>
+<li><p>Respecto a la longitud total N (ej: faltan 50 puntos en una serie de 5000 → 1%).</p></li>
+</ul>
+</li>
+<li><p>Posición</p></li>
+<li><ul>
+<li><p>Al inicio, al final o en el medio.</p></li>
+</ul>
+</li>
+</ul>
+<p>Si se repite siempre en el mismo subperiodo (ej: siempre falta el domingo por la noche).</p>
+</section>
+<section id="clasificacion-de-gaps">
+<h3>Clasificacion de gaps<a class="headerlink" href="#clasificacion-de-gaps" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Gap pequeño:
+gap_length / s &lt; 0.25 (menos de 25% de un ciclo estacional)
+→ fácil de imputar con interpolación, ffill/bfill, media estacional.</p></li>
+<li><p>Gap moderado:
+0.25 ≤ gap_length / s &lt; 0.75
+→ requiere métodos que combinen tendencia + estacionalidad (STL, SARIMA).</p></li>
+<li><p>Gap largo:
+gap_length / s ≥ 0.75
+→ se vuelve riesgoso, mejor usar modelos estadísticos (Kalman, ARIMA) o machine learning con lags/exógenas.</p></li>
+<li><p>Gap crítico/extenso:
+gap_length / N ≥ 20%
+→ puede invalidar gran parte del análisis; mejor reconocerlo como “laguna de información” más que imputar.</p></li>
+</ul>
+</section>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="implementacion">
+<h1>Implementacion<a class="headerlink" href="#implementacion" title="Link to this heading">#</a></h1>
+<section id="librerias-usadas">
+<h2>Librerias usadas<a class="headerlink" href="#librerias-usadas" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">seaborn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sns</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy.stats</span><span class="w"> </span><span class="kn">import</span> <span class="n">shapiro</span><span class="p">,</span> <span class="n">normaltest</span><span class="p">,</span> <span class="n">kstest</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="funciones-usadas">
+<h2>Funciones usadas<a class="headerlink" href="#funciones-usadas" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">Summary</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">sheet</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Hoja: </span><span class="si">{</span><span class="n">sheet</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Crear la tabla de resumen</span>
+    <span class="n">resumen</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;Cantidad de filas&quot;</span><span class="p">:</span> <span class="n">data</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+        <span class="s2">&quot;Cantidad de columnas&quot;</span><span class="p">:</span> <span class="n">data</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+        <span class="s2">&quot;Datos faltantes&quot;</span><span class="p">:</span> <span class="n">data</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">(),</span>
+        <span class="s2">&quot;Filas duplicadas&quot;</span><span class="p">:</span> <span class="n">data</span><span class="o">.</span><span class="n">duplicated</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+    <span class="p">}</span>
+
+    <span class="c1"># Convertir el resumen en un DataFrame</span>
+    <span class="n">ResumenHoja</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">resumen</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Resumen&quot;</span><span class="p">])</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Resumen:&quot;</span><span class="p">)</span>
+    <span class="n">display</span><span class="p">(</span><span class="n">ResumenHoja</span><span class="p">)</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Encabezado:&quot;</span><span class="p">)</span>
+    <span class="n">display</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">resumen_numericas</span><span class="p">(</span><span class="n">df</span><span class="p">):</span>
+
+    <span class="c1"># Seleccionar columnas numéricas</span>
+    <span class="n">numericas</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">select_dtypes</span><span class="p">(</span><span class="n">include</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;int64&#39;</span><span class="p">,</span> <span class="s1">&#39;float64&#39;</span><span class="p">,</span> <span class="s1">&#39;int32&#39;</span><span class="p">,</span> <span class="s1">&#39;float32&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">columns</span>
+    
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">numericas</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;No se detectaron variables numéricas en el DataFrame.&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="kc">None</span>
+    
+    <span class="c1"># Usamos describe() y agregamos info adicional</span>
+    <span class="n">resumen</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">numericas</span><span class="p">]</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span><span class="o">.</span><span class="n">T</span>  <span class="c1"># Transpuesto para mayor claridad</span>
+    <span class="n">resumen</span><span class="p">[</span><span class="s2">&quot;varianza&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">numericas</span><span class="p">]</span><span class="o">.</span><span class="n">var</span><span class="p">()</span>
+    <span class="n">resumen</span><span class="p">[</span><span class="s2">&quot;mediana&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">numericas</span><span class="p">]</span><span class="o">.</span><span class="n">median</span><span class="p">()</span>
+    
+    <span class="k">return</span> <span class="n">resumen</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">graficar_numericas</span><span class="p">(</span><span class="n">df</span><span class="p">):</span>
+
+    <span class="c1"># Detectar variables numéricas</span>
+    <span class="n">numericas</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">select_dtypes</span><span class="p">(</span><span class="n">include</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;int64&#39;</span><span class="p">,</span> <span class="s1">&#39;float64&#39;</span><span class="p">,</span> <span class="s1">&#39;int32&#39;</span><span class="p">,</span> <span class="s1">&#39;float32&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">columns</span>
+
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">numericas</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;No se detectaron variables numéricas en el DataFrame.&quot;</span><span class="p">)</span>
+        <span class="k">return</span>
+
+    <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">numericas</span><span class="p">:</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
+
+        <span class="c1"># Histograma</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">bins</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;skyblue&quot;</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Histograma de </span><span class="si">{</span><span class="n">col</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="n">col</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Frecuencia&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Boxplot</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">dropna</span><span class="p">(),</span> <span class="n">vert</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">patch_artist</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                    <span class="n">boxprops</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">facecolor</span><span class="o">=</span><span class="s2">&quot;lightgreen&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">),</span>
+                    <span class="n">medianprops</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s2">&quot;red&quot;</span><span class="p">))</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Boxplot de </span><span class="si">{</span><span class="n">col</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="n">col</span><span class="p">)</span>
+
+        <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">contar_na_numericas</span><span class="p">(</span><span class="n">df</span><span class="p">):</span>
+
+    <span class="c1"># Detectar variables numéricas</span>
+    <span class="n">numericas</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">select_dtypes</span><span class="p">(</span><span class="n">include</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;int64&#39;</span><span class="p">,</span> <span class="s1">&#39;float64&#39;</span><span class="p">,</span> <span class="s1">&#39;int32&#39;</span><span class="p">,</span> <span class="s1">&#39;float32&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">columns</span>
+
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">numericas</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;No se detectaron variables numéricas en el DataFrame.&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="kc">None</span>
+
+    <span class="c1"># Contar NAs en cada variable numérica</span>
+    <span class="n">na_counts</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">numericas</span><span class="p">]</span><span class="o">.</span><span class="n">isna</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+
+    <span class="k">return</span> <span class="n">na_counts</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">mapa_calor_nulos</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">6</span><span class="p">),</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;viridis&quot;</span><span class="p">):</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="n">figsize</span><span class="p">)</span>
+    <span class="n">sns</span><span class="o">.</span><span class="n">heatmap</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">isnull</span><span class="p">(),</span> 
+                <span class="n">cbar</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> 
+                <span class="n">cmap</span><span class="o">=</span><span class="n">cmap</span><span class="p">,</span> 
+                <span class="n">yticklabels</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Mapa de calor de valores faltantes&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="cargado-y-revision-de-datos">
+<h2>Cargado y revision de datos<a class="headerlink" href="#cargado-y-revision-de-datos" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;data.csv&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Summary</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="s2">&quot;data&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Hoja: data
+
+Resumen:
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Cantidad de filas</th>
+      <th>Cantidad de columnas</th>
+      <th>Datos faltantes</th>
+      <th>Filas duplicadas</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Resumen</th>
+      <td>731</td>
+      <td>9</td>
+      <td>715</td>
+      <td>0</td>
+    </tr>
+  </tbody>
+</table>
+</div></div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Encabezado:
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>fecha</th>
+      <th>temperatura</th>
+      <th>humedad</th>
+      <th>lluvia_mm</th>
+      <th>precio</th>
+      <th>ventas</th>
+      <th>energia_kwh</th>
+      <th>sensor_A</th>
+      <th>sensor_B</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2023-01-01</td>
+      <td>NaN</td>
+      <td>60.67</td>
+      <td>0.00</td>
+      <td>99.68</td>
+      <td>527.2</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>51.647</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2023-01-02</td>
+      <td>NaN</td>
+      <td>48.96</td>
+      <td>0.00</td>
+      <td>100.50</td>
+      <td>493.7</td>
+      <td>120.04</td>
+      <td>50.476</td>
+      <td>48.778</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2023-01-03</td>
+      <td>NaN</td>
+      <td>48.73</td>
+      <td>0.00</td>
+      <td>100.86</td>
+      <td>487.7</td>
+      <td>119.11</td>
+      <td>52.349</td>
+      <td>48.953</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2023-01-04</td>
+      <td>NaN</td>
+      <td>57.13</td>
+      <td>0.00</td>
+      <td>101.74</td>
+      <td>512.8</td>
+      <td>120.71</td>
+      <td>NaN</td>
+      <td>49.383</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>2023-01-05</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>2.79</td>
+      <td>101.77</td>
+      <td>477.4</td>
+      <td>119.39</td>
+      <td>NaN</td>
+      <td>46.964</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
+RangeIndex: 731 entries, 0 to 730
+Data columns (total 9 columns):
+ #   Column       Non-Null Count  Dtype  
+---  ------       --------------  -----  
+ 0   fecha        731 non-null    object 
+ 1   temperatura  624 non-null    float64
+ 2   humedad      616 non-null    float64
+ 3   lluvia_mm    731 non-null    float64
+ 4   precio       658 non-null    float64
+ 5   ventas       586 non-null    float64
+ 6   energia_kwh  671 non-null    float64
+ 7   sensor_A     612 non-null    float64
+ 8   sensor_B     635 non-null    float64
+dtypes: float64(8), object(1)
+memory usage: 51.5+ KB
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;fecha&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;fecha&quot;</span><span class="p">],</span> <span class="nb">format</span><span class="o">=</span><span class="s2">&quot;%Y-%m-</span><span class="si">%d</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="analisis-exploratorio-de-datos-eda">
+<h2>Analisis Exploratorio de datos(EDA)<a class="headerlink" href="#analisis-exploratorio-de-datos-eda" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">resumen_numericas</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>count</th>
+      <th>mean</th>
+      <th>std</th>
+      <th>min</th>
+      <th>25%</th>
+      <th>50%</th>
+      <th>75%</th>
+      <th>max</th>
+      <th>varianza</th>
+      <th>mediana</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>temperatura</th>
+      <td>624.0</td>
+      <td>18.004904</td>
+      <td>6.639764</td>
+      <td>4.330</td>
+      <td>11.89750</td>
+      <td>18.070</td>
+      <td>24.21500</td>
+      <td>30.160</td>
+      <td>44.086469</td>
+      <td>18.070</td>
+    </tr>
+    <tr>
+      <th>humedad</th>
+      <td>616.0</td>
+      <td>59.708506</td>
+      <td>8.938622</td>
+      <td>40.610</td>
+      <td>51.69500</td>
+      <td>59.665</td>
+      <td>67.52000</td>
+      <td>77.100</td>
+      <td>79.898955</td>
+      <td>59.665</td>
+    </tr>
+    <tr>
+      <th>lluvia_mm</th>
+      <td>731.0</td>
+      <td>1.754501</td>
+      <td>1.719964</td>
+      <td>0.000</td>
+      <td>0.00000</td>
+      <td>1.410</td>
+      <td>2.90000</td>
+      <td>7.650</td>
+      <td>2.958275</td>
+      <td>1.410</td>
+    </tr>
+    <tr>
+      <th>precio</th>
+      <td>658.0</td>
+      <td>102.162264</td>
+      <td>3.374867</td>
+      <td>94.830</td>
+      <td>99.67000</td>
+      <td>101.975</td>
+      <td>104.37250</td>
+      <td>111.310</td>
+      <td>11.389727</td>
+      <td>101.975</td>
+    </tr>
+    <tr>
+      <th>ventas</th>
+      <td>586.0</td>
+      <td>544.198464</td>
+      <td>34.067847</td>
+      <td>464.900</td>
+      <td>517.50000</td>
+      <td>545.100</td>
+      <td>571.05000</td>
+      <td>642.700</td>
+      <td>1160.618203</td>
+      <td>545.100</td>
+    </tr>
+    <tr>
+      <th>energia_kwh</th>
+      <td>671.0</td>
+      <td>141.981297</td>
+      <td>11.701740</td>
+      <td>117.940</td>
+      <td>131.50000</td>
+      <td>141.920</td>
+      <td>151.33500</td>
+      <td>165.080</td>
+      <td>136.930723</td>
+      <td>141.920</td>
+    </tr>
+    <tr>
+      <th>sensor_A</th>
+      <td>612.0</td>
+      <td>54.918033</td>
+      <td>3.288326</td>
+      <td>46.864</td>
+      <td>52.48875</td>
+      <td>54.953</td>
+      <td>57.34525</td>
+      <td>62.362</td>
+      <td>10.813090</td>
+      <td>54.953</td>
+    </tr>
+    <tr>
+      <th>sensor_B</th>
+      <td>635.0</td>
+      <td>53.407631</td>
+      <td>3.586204</td>
+      <td>45.033</td>
+      <td>50.58850</td>
+      <td>53.424</td>
+      <td>56.11300</td>
+      <td>61.743</td>
+      <td>12.860859</td>
+      <td>53.424</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">contar_na_numericas</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>temperatura    107
+humedad        115
+lluvia_mm        0
+precio          73
+ventas         145
+energia_kwh     60
+sensor_A       119
+sensor_B        96
+dtype: int64
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">graficar_numericas</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/d3b63e2753b02d0a14dbe211ad44a0186e17f39beccb95ab31848efee698ed55.png" src="_images/d3b63e2753b02d0a14dbe211ad44a0186e17f39beccb95ab31848efee698ed55.png" />
+<img alt="_images/ba8cc532f207d74400fbb03e2c85cc10f3eb3d59cf6871ad6f25b567207946d0.png" src="_images/ba8cc532f207d74400fbb03e2c85cc10f3eb3d59cf6871ad6f25b567207946d0.png" />
+<img alt="_images/191b5544707012fdb890fbb3d48958044d5615990c24268ee89a0ba1f87d1957.png" src="_images/191b5544707012fdb890fbb3d48958044d5615990c24268ee89a0ba1f87d1957.png" />
+<img alt="_images/93eeada7f0164118d918d2326a7dbbf2fa6ab4fe1e9b1816acb0f3939f44b2c2.png" src="_images/93eeada7f0164118d918d2326a7dbbf2fa6ab4fe1e9b1816acb0f3939f44b2c2.png" />
+<img alt="_images/89d261f8a79f0ec0c4b5d3d7e4aa6548e830f5a2133407da339db1a91863a8cc.png" src="_images/89d261f8a79f0ec0c4b5d3d7e4aa6548e830f5a2133407da339db1a91863a8cc.png" />
+<img alt="_images/3d5e9c887162b0791fbcf23ee2ec77d3b5e446fd96c4cb49ca8f62625d89b22a.png" src="_images/3d5e9c887162b0791fbcf23ee2ec77d3b5e446fd96c4cb49ca8f62625d89b22a.png" />
+<img alt="_images/57f21fb275e2c1daa8a18024a85b0b1fb4e68f51194a7564f36ce85f357b35da.png" src="_images/57f21fb275e2c1daa8a18024a85b0b1fb4e68f51194a7564f36ce85f357b35da.png" />
+<img alt="_images/83d2c66996598a6a091b43c42433d0fa6473836b47dce24d28cb45f902b9d8af.png" src="_images/83d2c66996598a6a091b43c42433d0fa6473836b47dce24d28cb45f902b9d8af.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mapa_calor_nulos</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/213673ad5a5a2990f33e0037e3eea6e74a2324e0f954b5474783c2573eab388d.png" src="_images/213673ad5a5a2990f33e0037e3eea6e74a2324e0f954b5474783c2573eab388d.png" />
+</div>
+</div>
+</section>
+<section id="clasificacion-de-datos-faltantes">
+<h2>Clasificacion de datos faltantes<a class="headerlink" href="#clasificacion-de-datos-faltantes" title="Link to this heading">#</a></h2>
+</section>
+<section id="tratamiento-de-datos-faltantes">
+<h2>Tratamiento de datos faltantes<a class="headerlink" href="#tratamiento-de-datos-faltantes" title="Link to this heading">#</a></h2>
+</section>
+<section id="verificacion-final-de-los-datos">
+<h2>verificacion final de los datos<a class="headerlink" href="#verificacion-final-de-los-datos" title="Link to this heading">#</a></h2>
+</section>
+<section id="id1">
+<h2><a class="headerlink" href="#id1" title="Link to this heading">#</a></h2>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="intro.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Presentacion</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="Implementacion_ejercicio.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Implementacion Del ejercicio</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Investigacion</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#naturaleza-de-las-series-de-tiempo">Naturaleza de las series de tiempo</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tipos-de-datos-faltantes-en-una-serie-de-tiempo">Tipos de datos faltantes en una serie de tiempo</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#estrategias-de-imputacion-para-series-de-tiempo">Estrategias de imputacion para series de tiempo</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gaps">Gaps</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#que-es-un-gap">¿Que es un Gap?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#caracterizacion-general-de-los-gaps">Caracterización general de los gaps</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#clasificacion-de-gaps">Clasificacion de gaps</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#implementacion">Implementacion</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#librerias-usadas">Librerias usadas</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#funciones-usadas">Funciones usadas</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cargado-y-revision-de-datos">Cargado y revision de datos</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-exploratorio-de-datos-eda">Analisis Exploratorio de datos(EDA)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#clasificacion-de-datos-faltantes">Clasificacion de datos faltantes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tratamiento-de-datos-faltantes">Tratamiento de datos faltantes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#verificacion-final-de-los-datos">verificacion final de los datos</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1"></a></li>
+</ul>
+</li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Miguel Jaimes
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
