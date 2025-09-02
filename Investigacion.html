@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -397,8 +397,10 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-exploratorio-de-datos-eda">Analisis Exploratorio de datos(EDA)</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#clasificacion-de-datos-faltantes">Clasificacion de datos faltantes</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tratamiento-de-datos-faltantes">Tratamiento de datos faltantes</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#verificacion-final-de-los-datos">verificacion final de los datos</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1"></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#verificacion-final-de-los-datos">verificacion final de los datos</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1"></a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -438,30 +440,30 @@ document.write(`
 <section id="estrategias-de-imputacion-para-series-de-tiempo">
 <h2>Estrategias de imputacion para series de tiempo<a class="headerlink" href="#estrategias-de-imputacion-para-series-de-tiempo" title="Link to this heading">#</a></h2>
 <p><strong>Métodos simples</strong>
-Forward Fill (ffill): rellenar con el último valor conocido.
-✅ Bueno para datos estables (ej. sensores).
-❌ Puede crear sesgo si hay tendencia.
-Backward Fill (bfill): usar el siguiente valor disponible.
+Forward Fill (ffill): rellenar con el último valor conocido.</p>
+<p>✅ Bueno para datos estables (ej. sensores).</p>
+<p>❌ Puede crear sesgo si hay tendencia.</p>
+<p>Backward Fill (bfill): usar el siguiente valor disponible.
 Similar limitación que ffill.</p>
 <p><strong>Interpolación temporal</strong>
 Lineal: conecta los puntos vecinos.
 Polinómica / spline: suaviza, útil cuando la curva es continua.
-Interpolación basada en tiempo: ajusta tomando en cuenta los intervalos.
-✅ Útil cuando la serie es continua.
-❌ No funciona bien con estacionalidad marcada.</p>
+Interpolación basada en tiempo: ajusta tomando en cuenta los intervalos.</p>
+<p>✅ Útil cuando la serie es continua.</p>
+<p>❌ No funciona bien con estacionalidad marcada.</p>
 <p><strong>Métodos basados en estacionalidad y tendencia</strong>
 Descomposición (STL, aditiva/multiplicativa): separar tendencia, estacionalidad y residuales, imputar en cada componente y recomponer.
 Mean/Median por temporada: reemplazar por la media del mismo día/hora en otros periodos.
 Ej: faltó el lunes 3pm → reemplazar por el promedio de todos los lunes a las 3pm.</p>
 <p><strong>Modelos estadísticos clásicos</strong>
 ARIMA / SARIMA: entrenar un modelo autorregresivo y predecir los valores faltantes.
-Kalman Smoothing (State Space Models): muy robusto para imputar porque maneja ruido y tendencia.
-✅ Más sofisticado, conserva propiedades de la serie.</p>
+Kalman Smoothing (State Space Models): muy robusto para imputar porque maneja ruido y tendencia.</p>
+<p>✅ Más sofisticado, conserva propiedades de la serie.</p>
 <p><strong>Métodos de Machine Learning / Deep Learning</strong>
 KNN Imputer temporal: busca patrones en ventanas similares.
 Random Forests o XGBoost: usa variables rezagadas (lags) y exógenas para predecir valores faltantes.
-Redes Neuronales Recurrentes (LSTM, GRU): aprenden dependencias largas en el tiempo.
-✅ Muy potentes para huecos grandes.
+Redes Neuronales Recurrentes (LSTM, GRU): aprenden dependencias largas en el tiempo.</p>
+<p>✅ Muy potentes para huecos grandes.
 ❌ Requieren más datos y recursos.</p>
 </section>
 <section id="gaps">
@@ -533,6 +535,7 @@ gap_length / N ≥ 20%
 <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">seaborn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sns</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">scipy.stats</span><span class="w"> </span><span class="kn">import</span> <span class="n">shapiro</span><span class="p">,</span> <span class="n">normaltest</span><span class="p">,</span> <span class="n">kstest</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">tabulate</span><span class="w"> </span><span class="kn">import</span> <span class="n">tabulate</span>
 </pre></div>
 </div>
 </div>
@@ -649,6 +652,145 @@ gap_length / N ≥ 20%
                 <span class="n">yticklabels</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Mapa de calor de valores faltantes&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">analizar_gaps</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">fecha_col</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="s2">&quot;D&quot;</span><span class="p">,</span> <span class="n">periodo_estacional</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">mostrar_tabla</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Analiza los datos faltantes en un dataframe de series de tiempo y muestra resumen tabular.</span>
+
+<span class="sd">    Parámetros</span>
+<span class="sd">    ----------</span>
+<span class="sd">    df : pd.DataFrame</span>
+<span class="sd">        DataFrame con los datos.</span>
+<span class="sd">    fecha_col : str</span>
+<span class="sd">        Nombre de la columna con las fechas.</span>
+<span class="sd">    freq : str</span>
+<span class="sd">        Frecuencia esperada de la serie (&quot;D&quot;=diaria, &quot;H&quot;=horaria, etc.).</span>
+<span class="sd">    periodo_estacional : int, opcional</span>
+<span class="sd">        Periodo estacional conocido (ej: 7 para diaria con estacionalidad semanal,</span>
+<span class="sd">        24 para horaria con ciclo diario).</span>
+<span class="sd">    mostrar_tabla : bool</span>
+<span class="sd">        Si True, muestra resumen tabular en consola.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># Asegurar índice temporal</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="n">df</span><span class="p">[</span><span class="n">fecha_col</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">fecha_col</span><span class="p">])</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="n">fecha_col</span><span class="p">)</span><span class="o">.</span><span class="n">asfreq</span><span class="p">(</span><span class="n">freq</span><span class="p">)</span>
+
+    <span class="n">resultados</span> <span class="o">=</span> <span class="p">{}</span>
+
+    <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">isna</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">continue</span>
+
+        <span class="c1"># Identificar posiciones faltantes</span>
+        <span class="n">na_mask</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">isna</span><span class="p">()</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+
+        <span class="c1"># Encontrar huecos consecutivos (gaps)</span>
+        <span class="n">df</span><span class="p">[</span><span class="n">col</span> <span class="o">+</span> <span class="s2">&quot;_gap_id&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">na_mask</span><span class="o">.</span><span class="n">diff</span><span class="p">()</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">cumsum</span><span class="p">()</span> <span class="o">*</span> <span class="n">na_mask</span>
+
+        <span class="n">gaps</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">col</span> <span class="o">+</span> <span class="s2">&quot;_gap_id&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">size</span><span class="p">()</span>
+        <span class="n">gaps</span> <span class="o">=</span> <span class="n">gaps</span><span class="p">[</span><span class="n">gaps</span><span class="o">.</span><span class="n">index</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">]</span>  <span class="c1"># quitar &quot;no-gap&quot;</span>
+
+        <span class="n">resumen</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+            <span class="s2">&quot;Variable&quot;</span><span class="p">:</span> <span class="n">col</span><span class="p">,</span>
+            <span class="s2">&quot;Inicio&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="n">col</span> <span class="o">+</span> <span class="s2">&quot;_gap_id&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="n">g</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="n">gaps</span><span class="o">.</span><span class="n">index</span><span class="p">],</span>
+            <span class="s2">&quot;Fin&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="n">col</span> <span class="o">+</span> <span class="s2">&quot;_gap_id&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="n">g</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="n">gaps</span><span class="o">.</span><span class="n">index</span><span class="p">],</span>
+            <span class="s2">&quot;Duración&quot;</span><span class="p">:</span> <span class="n">gaps</span><span class="o">.</span><span class="n">values</span>
+        <span class="p">})</span>
+
+        <span class="c1"># Clasificación según estacionalidad (si se pasa)</span>
+        <span class="k">if</span> <span class="n">periodo_estacional</span><span class="p">:</span>
+            <span class="n">resumen</span><span class="p">[</span><span class="s2">&quot;Ratio estacional&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">resumen</span><span class="p">[</span><span class="s2">&quot;Duración&quot;</span><span class="p">]</span> <span class="o">/</span> <span class="n">periodo_estacional</span>
+            <span class="n">resumen</span><span class="p">[</span><span class="s2">&quot;Clasificación&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">cut</span><span class="p">(</span>
+                <span class="n">resumen</span><span class="p">[</span><span class="s2">&quot;Ratio estacional&quot;</span><span class="p">],</span>
+                <span class="n">bins</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.25</span><span class="p">,</span> <span class="mf">0.75</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">],</span>
+                <span class="n">labels</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Pequeño&quot;</span><span class="p">,</span> <span class="s2">&quot;Moderado&quot;</span><span class="p">,</span> <span class="s2">&quot;Significativo&quot;</span><span class="p">,</span> <span class="s2">&quot;Largo&quot;</span><span class="p">]</span>
+            <span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">resumen</span><span class="p">[</span><span class="s2">&quot;Clasificación&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;Sin periodo definido&quot;</span>
+
+        <span class="n">resultados</span><span class="p">[</span><span class="n">col</span><span class="p">]</span> <span class="o">=</span> <span class="n">resumen</span>
+
+        <span class="k">if</span> <span class="n">mostrar_tabla</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">📌 Gaps en variable: </span><span class="si">{</span><span class="n">col</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">tabulate</span><span class="p">(</span><span class="n">resumen</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="s2">&quot;keys&quot;</span><span class="p">,</span> <span class="n">tablefmt</span><span class="o">=</span><span class="s2">&quot;pretty&quot;</span><span class="p">,</span> <span class="n">showindex</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
+
+    <span class="k">return</span> <span class="n">resultados</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">prueba_normalidad</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.05</span><span class="p">):</span>
+    <span class="n">resultados</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="c1"># Detectar variables numéricas</span>
+    <span class="n">numericas</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">select_dtypes</span><span class="p">(</span><span class="n">include</span><span class="o">=</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">number</span><span class="p">])</span><span class="o">.</span><span class="n">columns</span>
+
+    <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">numericas</span><span class="p">:</span>
+        <span class="n">serie</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">serie</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">8</span><span class="p">:</span>  <span class="c1"># muy pocas muestras → no confiable</span>
+            <span class="n">resultados</span><span class="o">.</span><span class="n">append</span><span class="p">({</span>
+                <span class="s2">&quot;variable&quot;</span><span class="p">:</span> <span class="n">col</span><span class="p">,</span>
+                <span class="s2">&quot;n_muestras&quot;</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">serie</span><span class="p">),</span>
+                <span class="s2">&quot;shapiro_p&quot;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span>
+                <span class="s2">&quot;dagostino_p&quot;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span>
+                <span class="s2">&quot;ks_p&quot;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span>
+                <span class="s2">&quot;es_normal (alpha=0.05)&quot;</span><span class="p">:</span> <span class="s2">&quot;Muestra insuficiente&quot;</span>
+            <span class="p">})</span>
+            <span class="k">continue</span>
+
+        <span class="c1"># Shapiro-Wilk (solo si n &lt;= 5000, más grande no recomendado)</span>
+        <span class="n">stat_shapiro</span><span class="p">,</span> <span class="n">p_shapiro</span> <span class="o">=</span> <span class="n">shapiro</span><span class="p">(</span><span class="n">serie</span><span class="p">)</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">serie</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="mi">5000</span> <span class="k">else</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">)</span>
+
+        <span class="c1"># D’Agostino y Pearson</span>
+        <span class="n">stat_dagostino</span><span class="p">,</span> <span class="n">p_dagostino</span> <span class="o">=</span> <span class="n">normaltest</span><span class="p">(</span><span class="n">serie</span><span class="p">)</span>
+
+        <span class="c1"># Kolmogorov-Smirnov contra normal estándar</span>
+        <span class="n">stat_ks</span><span class="p">,</span> <span class="n">p_ks</span> <span class="o">=</span> <span class="n">kstest</span><span class="p">(</span>
+            <span class="p">(</span><span class="n">serie</span> <span class="o">-</span> <span class="n">serie</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span> <span class="o">/</span> <span class="n">serie</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">ddof</span><span class="o">=</span><span class="mi">0</span><span class="p">),</span> <span class="s1">&#39;norm&#39;</span>
+        <span class="p">)</span>
+
+        <span class="c1"># Veredicto final</span>
+        <span class="n">es_normal</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">p_shapiro</span><span class="p">)</span> <span class="ow">or</span> <span class="n">p_shapiro</span> <span class="o">&gt;</span> <span class="n">alpha</span><span class="p">)</span> <span class="ow">and</span>
+            <span class="p">(</span><span class="n">p_dagostino</span> <span class="o">&gt;</span> <span class="n">alpha</span><span class="p">)</span> <span class="ow">and</span>
+            <span class="p">(</span><span class="n">p_ks</span> <span class="o">&gt;</span> <span class="n">alpha</span><span class="p">)</span>
+        <span class="p">)</span>
+
+        <span class="n">resultados</span><span class="o">.</span><span class="n">append</span><span class="p">({</span>
+            <span class="s2">&quot;variable&quot;</span><span class="p">:</span> <span class="n">col</span><span class="p">,</span>
+            <span class="s2">&quot;n_muestras&quot;</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">serie</span><span class="p">),</span>
+            <span class="s2">&quot;shapiro_p&quot;</span><span class="p">:</span> <span class="n">p_shapiro</span><span class="p">,</span>
+            <span class="s2">&quot;dagostino_p&quot;</span><span class="p">:</span> <span class="n">p_dagostino</span><span class="p">,</span>
+            <span class="s2">&quot;ks_p&quot;</span><span class="p">:</span> <span class="n">p_ks</span><span class="p">,</span>
+            <span class="s2">&quot;es_normal (alpha=0.05)&quot;</span><span class="p">:</span> <span class="n">es_normal</span>
+        <span class="p">})</span>
+
+    <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">resultados</span><span class="p">)</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="s2">&quot;es_normal (alpha=0.05)&quot;</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">eda</span><span class="p">(</span><span class="n">df</span><span class="p">):</span>
+    <span class="n">Summary</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="s2">&quot;data&quot;</span><span class="p">)</span>
+    <span class="n">resumen_numericas</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+    <span class="n">contar_na_numericas</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+    <span class="n">contar_na_numericas</span><span class="p">(</span><span class="n">df</span><span class="p">)</span><span class="o">/</span><span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+    <span class="n">prueba_normalidad</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+    <span class="n">graficar_numericas</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+    <span class="n">mapa_calor_nulos</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+    
 </pre></div>
 </div>
 </div>
@@ -1011,6 +1153,26 @@ dtype: int64
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">contar_na_numericas</span><span class="p">(</span><span class="n">df</span><span class="p">)</span><span class="o">/</span><span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>temperatura    0.146375
+humedad        0.157319
+lluvia_mm      0.000000
+precio         0.099863
+ventas         0.198358
+energia_kwh    0.082079
+sensor_A       0.162791
+sensor_B       0.131327
+dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">graficar_numericas</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -1036,18 +1198,1811 @@ dtype: int64
 <img alt="_images/213673ad5a5a2990f33e0037e3eea6e74a2324e0f954b5474783c2573eab388d.png" src="_images/213673ad5a5a2990f33e0037e3eea6e74a2324e0f954b5474783c2573eab388d.png" />
 </div>
 </div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">prueba_normalidad</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>variable</th>
+      <th>n_muestras</th>
+      <th>shapiro_p</th>
+      <th>dagostino_p</th>
+      <th>ks_p</th>
+      <th>es_normal (alpha=0.05)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>temperatura</td>
+      <td>624</td>
+      <td>4.497637e-14</td>
+      <td>4.109462e-228</td>
+      <td>8.917831e-05</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>humedad</td>
+      <td>616</td>
+      <td>5.052815e-12</td>
+      <td>1.162274e-84</td>
+      <td>2.333400e-03</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>lluvia_mm</td>
+      <td>731</td>
+      <td>2.029689e-22</td>
+      <td>1.172456e-14</td>
+      <td>1.532833e-15</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>precio</td>
+      <td>658</td>
+      <td>4.960803e-05</td>
+      <td>1.333171e-03</td>
+      <td>1.569142e-01</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>ventas</td>
+      <td>586</td>
+      <td>2.113621e-05</td>
+      <td>4.204641e-09</td>
+      <td>4.948417e-02</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>energia_kwh</td>
+      <td>671</td>
+      <td>1.516038e-09</td>
+      <td>6.413484e-27</td>
+      <td>3.909482e-03</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>sensor_A</td>
+      <td>612</td>
+      <td>4.774779e-04</td>
+      <td>2.912352e-06</td>
+      <td>1.195304e-01</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>sensor_B</td>
+      <td>635</td>
+      <td>3.846968e-05</td>
+      <td>6.846259e-10</td>
+      <td>1.106053e-01</td>
+      <td>False</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
 </section>
 <section id="clasificacion-de-datos-faltantes">
 <h2>Clasificacion de datos faltantes<a class="headerlink" href="#clasificacion-de-datos-faltantes" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">analizar_gaps</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">fecha_col</span><span class="o">=</span><span class="s2">&quot;fecha&quot;</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="s2">&quot;D&quot;</span><span class="p">,</span> <span class="n">periodo_estacional</span><span class="o">=</span> <span class="mi">7</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>📌 Gaps en variable: temperatura
++-------------+---------------------+---------------------+----------+---------------------+---------------+
+|  Variable   |       Inicio        |         Fin         | Duración |  Ratio estacional   | Clasificación |
++-------------+---------------------+---------------------+----------+---------------------+---------------+
+| temperatura | 2023-01-15 00:00:00 | 2023-01-15 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| temperatura | 2023-01-21 00:00:00 | 2023-01-21 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| temperatura | 2023-02-23 00:00:00 | 2023-02-23 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| temperatura | 2023-03-03 00:00:00 | 2023-03-03 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| temperatura | 2023-03-06 00:00:00 | 2023-03-07 00:00:00 |    2     | 0.2857142857142857  |   Moderado    |
+| temperatura | 2023-03-16 00:00:00 | 2023-03-16 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| temperatura | 2023-03-25 00:00:00 | 2023-03-25 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| temperatura | 2023-03-27 00:00:00 | 2023-03-27 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| temperatura | 2023-03-31 00:00:00 | 2023-03-31 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| temperatura | 2023-04-11 00:00:00 | 2023-04-11 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| temperatura | 2023-04-26 00:00:00 | 2023-04-27 00:00:00 |    2     | 0.2857142857142857  |   Moderado    |
+| temperatura | 2023-04-30 00:00:00 | 2023-04-30 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| temperatura | 2023-05-03 00:00:00 | 2023-05-03 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| temperatura | 2023-05-05 00:00:00 | 2023-05-05 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| temperatura | 2023-05-07 00:00:00 | 2023-05-07 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| temperatura | 2023-05-11 00:00:00 | 2023-05-11 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| temperatura | 2023-05-27 00:00:00 | 2023-05-27 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| temperatura | 2023-06-09 00:00:00 | 2023-06-09 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| temperatura | 2023-06-16 00:00:00 | 2023-06-16 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| temperatura | 2023-06-19 00:00:00 | 2023-06-19 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| temperatura | 2023-06-26 00:00:00 | 2023-06-26 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| temperatura | 2023-06-30 00:00:00 | 2023-06-30 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| temperatura | 2023-07-02 00:00:00 | 2023-07-02 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| temperatura | 2023-07-04 00:00:00 | 2023-07-04 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| temperatura | 2023-07-08 00:00:00 | 2023-07-08 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| temperatura | 2023-07-11 00:00:00 | 2023-07-11 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| temperatura | 2023-07-13 00:00:00 | 2023-07-13 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| temperatura | 2023-07-30 00:00:00 | 2023-08-01 00:00:00 |    3     | 0.42857142857142855 |   Moderado    |
+| temperatura | 2023-08-04 00:00:00 | 2023-08-04 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| temperatura | 2023-08-14 00:00:00 | 2023-08-14 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| temperatura | 2023-08-20 00:00:00 | 2023-08-20 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| temperatura | 2023-08-27 00:00:00 | 2023-08-27 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| temperatura | 2023-09-11 00:00:00 | 2023-09-11 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| temperatura | 2023-09-16 00:00:00 | 2023-09-16 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| temperatura | 2023-09-24 00:00:00 | 2023-09-24 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| temperatura | 2023-09-28 00:00:00 | 2023-09-28 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| temperatura | 2023-10-04 00:00:00 | 2023-10-04 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| temperatura | 2023-10-22 00:00:00 | 2023-10-22 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| temperatura | 2023-10-27 00:00:00 | 2023-10-27 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| temperatura | 2023-11-02 00:00:00 | 2023-11-02 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| temperatura | 2023-11-08 00:00:00 | 2023-11-08 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| temperatura | 2023-11-14 00:00:00 | 2023-11-14 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| temperatura | 2023-11-21 00:00:00 | 2023-11-21 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| temperatura | 2023-12-02 00:00:00 | 2023-12-02 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| temperatura | 2023-12-23 00:00:00 | 2023-12-23 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| temperatura | 2023-12-25 00:00:00 | 2023-12-26 00:00:00 |    2     | 0.2857142857142857  |   Moderado    |
+| temperatura | 2023-12-31 00:00:00 | 2023-12-31 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| temperatura | 2024-01-29 00:00:00 | 2024-01-29 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| temperatura | 2024-02-01 00:00:00 | 2024-02-01 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| temperatura | 2024-02-07 00:00:00 | 2024-02-07 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| temperatura | 2024-02-16 00:00:00 | 2024-02-16 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| temperatura | 2024-02-21 00:00:00 | 2024-02-21 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| temperatura | 2024-02-28 00:00:00 | 2024-02-28 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| temperatura | 2024-03-01 00:00:00 | 2024-03-02 00:00:00 |    2     | 0.2857142857142857  |   Moderado    |
+| temperatura | 2024-03-13 00:00:00 | 2024-03-13 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| temperatura | 2024-03-29 00:00:00 | 2024-03-29 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| temperatura | 2024-04-11 00:00:00 | 2024-04-12 00:00:00 |    2     | 0.2857142857142857  |   Moderado    |
+| temperatura | 2024-04-21 00:00:00 | 2024-04-21 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| temperatura | 2024-05-17 00:00:00 | 2024-05-17 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| temperatura | 2024-05-25 00:00:00 | 2024-05-25 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| temperatura | 2024-05-27 00:00:00 | 2024-05-27 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| temperatura | 2024-06-08 00:00:00 | 2024-06-08 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| temperatura | 2024-06-10 00:00:00 | 2024-06-10 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| temperatura | 2024-06-12 00:00:00 | 2024-06-12 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| temperatura | 2024-06-15 00:00:00 | 2024-06-15 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| temperatura | 2024-06-23 00:00:00 | 2024-06-23 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| temperatura | 2024-06-30 00:00:00 | 2024-06-30 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| temperatura | 2024-07-05 00:00:00 | 2024-07-05 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| temperatura | 2024-07-17 00:00:00 | 2024-07-17 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| temperatura | 2024-08-03 00:00:00 | 2024-08-03 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| temperatura | 2024-08-09 00:00:00 | 2024-08-09 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| temperatura | 2024-08-13 00:00:00 | 2024-08-14 00:00:00 |    2     | 0.2857142857142857  |   Moderado    |
+| temperatura | 2024-08-27 00:00:00 | 2024-08-27 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| temperatura | 2024-08-30 00:00:00 | 2024-08-30 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| temperatura | 2024-09-06 00:00:00 | 2024-09-06 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| temperatura | 2024-09-11 00:00:00 | 2024-09-11 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| temperatura | 2024-09-18 00:00:00 | 2024-09-18 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| temperatura | 2024-09-24 00:00:00 | 2024-09-24 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| temperatura | 2024-10-01 00:00:00 | 2024-10-01 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| temperatura | 2024-10-05 00:00:00 | 2024-10-06 00:00:00 |    2     | 0.2857142857142857  |   Moderado    |
+| temperatura | 2024-10-09 00:00:00 | 2024-10-09 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| temperatura | 2024-10-11 00:00:00 | 2024-10-11 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| temperatura | 2024-10-13 00:00:00 | 2024-10-14 00:00:00 |    2     | 0.2857142857142857  |   Moderado    |
+| temperatura | 2024-10-23 00:00:00 | 2024-10-23 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| temperatura | 2024-11-02 00:00:00 | 2024-11-02 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| temperatura | 2024-11-28 00:00:00 | 2024-11-28 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| temperatura | 2024-12-04 00:00:00 | 2024-12-04 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| temperatura | 2024-12-16 00:00:00 | 2024-12-16 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| temperatura | 2024-12-21 00:00:00 | 2024-12-22 00:00:00 |    2     | 0.2857142857142857  |   Moderado    |
++-------------+---------------------+---------------------+----------+---------------------+---------------+
+
+📌 Gaps en variable: humedad
++----------+---------------------+---------------------+----------+---------------------+---------------+
+| Variable |       Inicio        |         Fin         | Duración |  Ratio estacional   | Clasificación |
++----------+---------------------+---------------------+----------+---------------------+---------------+
+| humedad  | 2023-01-05 00:00:00 | 2023-01-05 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| humedad  | 2023-01-13 00:00:00 | 2023-01-14 00:00:00 |    2     | 0.2857142857142857  |   Moderado    |
+| humedad  | 2023-01-19 00:00:00 | 2023-01-19 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| humedad  | 2023-01-29 00:00:00 | 2023-01-29 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| humedad  | 2023-02-01 00:00:00 | 2023-02-01 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| humedad  | 2023-02-14 00:00:00 | 2023-02-14 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| humedad  | 2023-02-16 00:00:00 | 2023-02-16 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| humedad  | 2023-02-19 00:00:00 | 2023-02-19 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| humedad  | 2023-02-23 00:00:00 | 2023-02-23 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| humedad  | 2023-02-27 00:00:00 | 2023-02-27 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| humedad  | 2023-03-02 00:00:00 | 2023-03-03 00:00:00 |    2     | 0.2857142857142857  |   Moderado    |
+| humedad  | 2023-03-05 00:00:00 | 2023-03-05 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| humedad  | 2023-03-17 00:00:00 | 2023-03-17 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| humedad  | 2023-03-28 00:00:00 | 2023-03-28 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| humedad  | 2023-04-15 00:00:00 | 2023-04-15 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| humedad  | 2023-04-30 00:00:00 | 2023-04-30 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| humedad  | 2023-05-05 00:00:00 | 2023-05-05 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| humedad  | 2023-05-21 00:00:00 | 2023-05-21 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| humedad  | 2023-06-05 00:00:00 | 2023-06-06 00:00:00 |    2     | 0.2857142857142857  |   Moderado    |
+| humedad  | 2023-06-23 00:00:00 | 2023-06-23 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| humedad  | 2023-06-28 00:00:00 | 2023-06-28 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| humedad  | 2023-07-09 00:00:00 | 2023-07-10 00:00:00 |    2     | 0.2857142857142857  |   Moderado    |
+| humedad  | 2023-07-12 00:00:00 | 2023-07-12 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| humedad  | 2023-07-19 00:00:00 | 2023-07-19 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| humedad  | 2023-07-23 00:00:00 | 2023-07-23 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| humedad  | 2023-08-01 00:00:00 | 2023-08-01 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| humedad  | 2023-08-05 00:00:00 | 2023-08-05 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| humedad  | 2023-08-15 00:00:00 | 2023-08-15 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| humedad  | 2023-08-23 00:00:00 | 2023-08-23 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| humedad  | 2023-08-25 00:00:00 | 2023-08-25 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| humedad  | 2023-08-27 00:00:00 | 2023-08-27 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| humedad  | 2023-08-29 00:00:00 | 2023-08-29 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| humedad  | 2023-09-10 00:00:00 | 2023-09-10 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| humedad  | 2023-09-18 00:00:00 | 2023-09-18 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| humedad  | 2023-09-21 00:00:00 | 2023-09-21 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| humedad  | 2023-09-28 00:00:00 | 2023-09-28 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| humedad  | 2023-09-30 00:00:00 | 2023-09-30 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| humedad  | 2023-10-11 00:00:00 | 2023-10-11 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| humedad  | 2023-10-20 00:00:00 | 2023-10-20 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| humedad  | 2023-10-24 00:00:00 | 2023-10-24 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| humedad  | 2023-10-29 00:00:00 | 2023-10-29 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| humedad  | 2023-11-02 00:00:00 | 2023-11-02 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| humedad  | 2023-11-08 00:00:00 | 2023-11-08 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| humedad  | 2023-11-10 00:00:00 | 2023-11-10 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| humedad  | 2023-11-15 00:00:00 | 2023-11-15 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| humedad  | 2023-11-21 00:00:00 | 2023-11-21 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| humedad  | 2023-11-24 00:00:00 | 2023-11-24 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| humedad  | 2023-12-04 00:00:00 | 2023-12-04 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| humedad  | 2023-12-10 00:00:00 | 2023-12-10 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| humedad  | 2023-12-16 00:00:00 | 2023-12-17 00:00:00 |    2     | 0.2857142857142857  |   Moderado    |
+| humedad  | 2023-12-23 00:00:00 | 2023-12-23 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| humedad  | 2024-01-07 00:00:00 | 2024-01-07 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| humedad  | 2024-01-14 00:00:00 | 2024-01-14 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| humedad  | 2024-01-24 00:00:00 | 2024-01-24 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| humedad  | 2024-01-27 00:00:00 | 2024-01-28 00:00:00 |    2     | 0.2857142857142857  |   Moderado    |
+| humedad  | 2024-02-03 00:00:00 | 2024-02-04 00:00:00 |    2     | 0.2857142857142857  |   Moderado    |
+| humedad  | 2024-03-02 00:00:00 | 2024-03-02 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| humedad  | 2024-03-18 00:00:00 | 2024-03-18 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| humedad  | 2024-04-07 00:00:00 | 2024-04-07 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| humedad  | 2024-04-12 00:00:00 | 2024-04-12 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| humedad  | 2024-04-29 00:00:00 | 2024-04-29 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| humedad  | 2024-05-03 00:00:00 | 2024-05-03 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| humedad  | 2024-05-05 00:00:00 | 2024-05-05 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| humedad  | 2024-05-17 00:00:00 | 2024-05-17 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| humedad  | 2024-05-20 00:00:00 | 2024-05-21 00:00:00 |    2     | 0.2857142857142857  |   Moderado    |
+| humedad  | 2024-05-28 00:00:00 | 2024-05-28 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| humedad  | 2024-05-30 00:00:00 | 2024-05-31 00:00:00 |    2     | 0.2857142857142857  |   Moderado    |
+| humedad  | 2024-06-10 00:00:00 | 2024-06-10 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| humedad  | 2024-06-15 00:00:00 | 2024-06-15 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| humedad  | 2024-06-17 00:00:00 | 2024-06-17 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| humedad  | 2024-06-25 00:00:00 | 2024-06-25 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| humedad  | 2024-06-27 00:00:00 | 2024-06-27 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| humedad  | 2024-07-02 00:00:00 | 2024-07-02 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| humedad  | 2024-07-13 00:00:00 | 2024-07-13 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| humedad  | 2024-07-22 00:00:00 | 2024-07-23 00:00:00 |    2     | 0.2857142857142857  |   Moderado    |
+| humedad  | 2024-07-30 00:00:00 | 2024-07-30 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| humedad  | 2024-08-05 00:00:00 | 2024-08-05 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| humedad  | 2024-08-08 00:00:00 | 2024-08-08 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| humedad  | 2024-08-11 00:00:00 | 2024-08-11 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| humedad  | 2024-08-24 00:00:00 | 2024-08-24 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| humedad  | 2024-08-26 00:00:00 | 2024-08-26 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| humedad  | 2024-09-02 00:00:00 | 2024-09-02 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| humedad  | 2024-09-06 00:00:00 | 2024-09-06 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| humedad  | 2024-09-19 00:00:00 | 2024-09-19 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| humedad  | 2024-09-30 00:00:00 | 2024-09-30 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| humedad  | 2024-10-07 00:00:00 | 2024-10-07 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| humedad  | 2024-10-18 00:00:00 | 2024-10-18 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| humedad  | 2024-10-28 00:00:00 | 2024-10-28 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| humedad  | 2024-10-31 00:00:00 | 2024-10-31 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| humedad  | 2024-11-07 00:00:00 | 2024-11-07 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| humedad  | 2024-11-09 00:00:00 | 2024-11-10 00:00:00 |    2     | 0.2857142857142857  |   Moderado    |
+| humedad  | 2024-11-13 00:00:00 | 2024-11-14 00:00:00 |    2     | 0.2857142857142857  |   Moderado    |
+| humedad  | 2024-11-18 00:00:00 | 2024-11-18 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| humedad  | 2024-12-05 00:00:00 | 2024-12-05 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| humedad  | 2024-12-11 00:00:00 | 2024-12-11 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| humedad  | 2024-12-16 00:00:00 | 2024-12-16 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| humedad  | 2024-12-25 00:00:00 | 2024-12-31 00:00:00 |    7     |         1.0         | Significativo |
++----------+---------------------+---------------------+----------+---------------------+---------------+
+
+📌 Gaps en variable: precio
++----------+---------------------+---------------------+----------+---------------------+---------------+
+| Variable |       Inicio        |         Fin         | Duración |  Ratio estacional   | Clasificación |
++----------+---------------------+---------------------+----------+---------------------+---------------+
+|  precio  | 2023-01-06 00:00:00 | 2023-01-06 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+|  precio  | 2023-01-11 00:00:00 | 2023-01-11 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+|  precio  | 2023-02-12 00:00:00 | 2023-02-12 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+|  precio  | 2023-02-15 00:00:00 | 2023-02-15 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+|  precio  | 2023-03-13 00:00:00 | 2023-03-13 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+|  precio  | 2023-04-09 00:00:00 | 2023-04-10 00:00:00 |    2     | 0.2857142857142857  |   Moderado    |
+|  precio  | 2023-05-02 00:00:00 | 2023-05-02 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+|  precio  | 2023-05-10 00:00:00 | 2023-05-10 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+|  precio  | 2023-05-15 00:00:00 | 2023-05-15 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+|  precio  | 2023-05-22 00:00:00 | 2023-05-22 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+|  precio  | 2023-06-19 00:00:00 | 2023-06-19 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+|  precio  | 2023-06-25 00:00:00 | 2023-06-25 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+|  precio  | 2023-06-29 00:00:00 | 2023-06-29 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+|  precio  | 2023-07-18 00:00:00 | 2023-07-18 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+|  precio  | 2023-07-26 00:00:00 | 2023-07-26 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+|  precio  | 2023-08-07 00:00:00 | 2023-08-07 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+|  precio  | 2023-08-19 00:00:00 | 2023-08-19 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+|  precio  | 2023-08-29 00:00:00 | 2023-08-29 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+|  precio  | 2023-09-07 00:00:00 | 2023-09-07 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+|  precio  | 2023-09-20 00:00:00 | 2023-09-20 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+|  precio  | 2023-09-25 00:00:00 | 2023-09-25 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+|  precio  | 2023-10-08 00:00:00 | 2023-10-08 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+|  precio  | 2023-11-26 00:00:00 | 2023-11-26 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+|  precio  | 2023-11-28 00:00:00 | 2023-11-28 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+|  precio  | 2023-12-16 00:00:00 | 2023-12-16 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+|  precio  | 2023-12-22 00:00:00 | 2023-12-22 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+|  precio  | 2024-01-11 00:00:00 | 2024-01-11 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+|  precio  | 2024-01-13 00:00:00 | 2024-01-13 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+|  precio  | 2024-01-31 00:00:00 | 2024-01-31 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+|  precio  | 2024-02-07 00:00:00 | 2024-02-07 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+|  precio  | 2024-02-14 00:00:00 | 2024-02-14 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+|  precio  | 2024-02-20 00:00:00 | 2024-02-20 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+|  precio  | 2024-03-25 00:00:00 | 2024-03-25 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+|  precio  | 2024-04-08 00:00:00 | 2024-04-08 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+|  precio  | 2024-04-12 00:00:00 | 2024-04-12 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+|  precio  | 2024-04-26 00:00:00 | 2024-04-26 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+|  precio  | 2024-05-04 00:00:00 | 2024-05-04 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+|  precio  | 2024-05-17 00:00:00 | 2024-05-17 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+|  precio  | 2024-05-22 00:00:00 | 2024-05-22 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+|  precio  | 2024-05-30 00:00:00 | 2024-05-30 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+|  precio  | 2024-06-02 00:00:00 | 2024-06-02 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+|  precio  | 2024-06-11 00:00:00 | 2024-06-11 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+|  precio  | 2024-06-14 00:00:00 | 2024-06-14 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+|  precio  | 2024-06-18 00:00:00 | 2024-06-18 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+|  precio  | 2024-07-15 00:00:00 | 2024-07-15 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+|  precio  | 2024-07-19 00:00:00 | 2024-07-19 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+|  precio  | 2024-07-22 00:00:00 | 2024-07-23 00:00:00 |    2     | 0.2857142857142857  |   Moderado    |
+|  precio  | 2024-08-12 00:00:00 | 2024-08-12 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+|  precio  | 2024-08-24 00:00:00 | 2024-08-24 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+|  precio  | 2024-08-29 00:00:00 | 2024-08-29 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+|  precio  | 2024-09-03 00:00:00 | 2024-09-03 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+|  precio  | 2024-10-02 00:00:00 | 2024-10-02 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+|  precio  | 2024-10-10 00:00:00 | 2024-10-10 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+|  precio  | 2024-10-12 00:00:00 | 2024-10-19 00:00:00 |    8     | 1.1428571428571428  | Significativo |
+|  precio  | 2024-10-21 00:00:00 | 2024-10-21 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+|  precio  | 2024-10-26 00:00:00 | 2024-10-26 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+|  precio  | 2024-11-03 00:00:00 | 2024-11-03 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+|  precio  | 2024-11-05 00:00:00 | 2024-11-06 00:00:00 |    2     | 0.2857142857142857  |   Moderado    |
+|  precio  | 2024-11-22 00:00:00 | 2024-11-22 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+|  precio  | 2024-12-05 00:00:00 | 2024-12-05 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+|  precio  | 2024-12-12 00:00:00 | 2024-12-12 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+|  precio  | 2024-12-15 00:00:00 | 2024-12-15 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+|  precio  | 2024-12-29 00:00:00 | 2024-12-29 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
++----------+---------------------+---------------------+----------+---------------------+---------------+
+
+📌 Gaps en variable: ventas
++----------+---------------------+---------------------+----------+---------------------+---------------+
+| Variable |       Inicio        |         Fin         | Duración |  Ratio estacional   | Clasificación |
++----------+---------------------+---------------------+----------+---------------------+---------------+
+|  ventas  | 2023-01-12 00:00:00 | 2023-01-12 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+|  ventas  | 2023-01-20 00:00:00 | 2023-01-20 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+|  ventas  | 2023-01-27 00:00:00 | 2023-01-27 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+|  ventas  | 2023-02-13 00:00:00 | 2023-02-13 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+|  ventas  | 2023-02-17 00:00:00 | 2023-02-17 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+|  ventas  | 2023-02-25 00:00:00 | 2023-02-25 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+|  ventas  | 2023-03-02 00:00:00 | 2023-03-02 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+|  ventas  | 2023-03-07 00:00:00 | 2023-03-07 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+|  ventas  | 2023-03-16 00:00:00 | 2023-03-16 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+|  ventas  | 2023-03-29 00:00:00 | 2023-03-29 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+|  ventas  | 2023-04-02 00:00:00 | 2023-04-02 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+|  ventas  | 2023-04-07 00:00:00 | 2023-04-10 00:00:00 |    4     | 0.5714285714285714  |   Moderado    |
+|  ventas  | 2023-04-23 00:00:00 | 2023-04-23 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+|  ventas  | 2023-04-29 00:00:00 | 2023-04-29 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+|  ventas  | 2023-05-07 00:00:00 | 2023-05-07 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+|  ventas  | 2023-05-10 00:00:00 | 2023-05-10 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+|  ventas  | 2023-05-15 00:00:00 | 2023-05-15 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+|  ventas  | 2023-05-19 00:00:00 | 2023-05-19 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+|  ventas  | 2023-05-30 00:00:00 | 2023-05-30 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+|  ventas  | 2023-06-05 00:00:00 | 2023-06-05 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+|  ventas  | 2023-06-07 00:00:00 | 2023-06-07 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+|  ventas  | 2023-06-15 00:00:00 | 2023-06-15 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+|  ventas  | 2023-06-18 00:00:00 | 2023-06-18 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+|  ventas  | 2023-06-21 00:00:00 | 2023-06-21 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+|  ventas  | 2023-06-28 00:00:00 | 2023-06-28 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+|  ventas  | 2023-07-07 00:00:00 | 2023-07-07 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+|  ventas  | 2023-07-13 00:00:00 | 2023-07-14 00:00:00 |    2     | 0.2857142857142857  |   Moderado    |
+|  ventas  | 2023-07-19 00:00:00 | 2023-07-19 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+|  ventas  | 2023-07-23 00:00:00 | 2023-07-23 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+|  ventas  | 2023-07-28 00:00:00 | 2023-07-28 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+|  ventas  | 2023-08-04 00:00:00 | 2023-08-05 00:00:00 |    2     | 0.2857142857142857  |   Moderado    |
+|  ventas  | 2023-08-15 00:00:00 | 2023-08-16 00:00:00 |    2     | 0.2857142857142857  |   Moderado    |
+|  ventas  | 2023-08-28 00:00:00 | 2023-08-28 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+|  ventas  | 2023-09-01 00:00:00 | 2023-09-01 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+|  ventas  | 2023-09-07 00:00:00 | 2023-09-07 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+|  ventas  | 2023-09-15 00:00:00 | 2023-09-15 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+|  ventas  | 2023-09-23 00:00:00 | 2023-09-23 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+|  ventas  | 2023-10-06 00:00:00 | 2023-10-06 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+|  ventas  | 2023-10-14 00:00:00 | 2023-10-15 00:00:00 |    2     | 0.2857142857142857  |   Moderado    |
+|  ventas  | 2023-10-22 00:00:00 | 2023-10-22 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+|  ventas  | 2023-10-25 00:00:00 | 2023-10-25 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+|  ventas  | 2023-11-01 00:00:00 | 2023-11-02 00:00:00 |    2     | 0.2857142857142857  |   Moderado    |
+|  ventas  | 2023-11-07 00:00:00 | 2023-11-07 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+|  ventas  | 2023-11-16 00:00:00 | 2023-11-17 00:00:00 |    2     | 0.2857142857142857  |   Moderado    |
+|  ventas  | 2023-11-20 00:00:00 | 2023-11-20 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+|  ventas  | 2023-11-24 00:00:00 | 2023-11-24 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+|  ventas  | 2023-11-26 00:00:00 | 2023-11-26 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+|  ventas  | 2023-11-29 00:00:00 | 2023-11-29 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+|  ventas  | 2023-12-02 00:00:00 | 2023-12-03 00:00:00 |    2     | 0.2857142857142857  |   Moderado    |
+|  ventas  | 2023-12-08 00:00:00 | 2023-12-08 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+|  ventas  | 2023-12-10 00:00:00 | 2023-12-10 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+|  ventas  | 2023-12-16 00:00:00 | 2023-12-16 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+|  ventas  | 2023-12-22 00:00:00 | 2023-12-22 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+|  ventas  | 2023-12-25 00:00:00 | 2023-12-25 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+|  ventas  | 2023-12-27 00:00:00 | 2023-12-27 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+|  ventas  | 2024-01-02 00:00:00 | 2024-01-02 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+|  ventas  | 2024-01-08 00:00:00 | 2024-01-08 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+|  ventas  | 2024-01-10 00:00:00 | 2024-01-10 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+|  ventas  | 2024-01-21 00:00:00 | 2024-01-21 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+|  ventas  | 2024-01-27 00:00:00 | 2024-01-27 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+|  ventas  | 2024-01-31 00:00:00 | 2024-01-31 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+|  ventas  | 2024-02-07 00:00:00 | 2024-02-07 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+|  ventas  | 2024-02-20 00:00:00 | 2024-02-20 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+|  ventas  | 2024-02-22 00:00:00 | 2024-02-22 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+|  ventas  | 2024-02-25 00:00:00 | 2024-02-25 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+|  ventas  | 2024-02-27 00:00:00 | 2024-02-27 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+|  ventas  | 2024-03-01 00:00:00 | 2024-03-01 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+|  ventas  | 2024-03-14 00:00:00 | 2024-03-14 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+|  ventas  | 2024-03-18 00:00:00 | 2024-03-18 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+|  ventas  | 2024-03-21 00:00:00 | 2024-03-22 00:00:00 |    2     | 0.2857142857142857  |   Moderado    |
+|  ventas  | 2024-03-25 00:00:00 | 2024-03-25 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+|  ventas  | 2024-03-27 00:00:00 | 2024-03-27 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+|  ventas  | 2024-03-29 00:00:00 | 2024-03-29 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+|  ventas  | 2024-04-09 00:00:00 | 2024-04-10 00:00:00 |    2     | 0.2857142857142857  |   Moderado    |
+|  ventas  | 2024-04-23 00:00:00 | 2024-04-24 00:00:00 |    2     | 0.2857142857142857  |   Moderado    |
+|  ventas  | 2024-04-30 00:00:00 | 2024-04-30 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+|  ventas  | 2024-05-13 00:00:00 | 2024-05-13 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+|  ventas  | 2024-05-16 00:00:00 | 2024-05-16 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+|  ventas  | 2024-05-18 00:00:00 | 2024-05-18 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+|  ventas  | 2024-05-24 00:00:00 | 2024-05-24 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+|  ventas  | 2024-05-26 00:00:00 | 2024-05-26 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+|  ventas  | 2024-05-30 00:00:00 | 2024-05-30 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+|  ventas  | 2024-06-11 00:00:00 | 2024-06-12 00:00:00 |    2     | 0.2857142857142857  |   Moderado    |
+|  ventas  | 2024-06-20 00:00:00 | 2024-06-20 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+|  ventas  | 2024-06-25 00:00:00 | 2024-06-25 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+|  ventas  | 2024-07-01 00:00:00 | 2024-07-01 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+|  ventas  | 2024-07-03 00:00:00 | 2024-07-03 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+|  ventas  | 2024-07-07 00:00:00 | 2024-07-07 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+|  ventas  | 2024-07-09 00:00:00 | 2024-07-09 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+|  ventas  | 2024-07-13 00:00:00 | 2024-07-13 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+|  ventas  | 2024-07-15 00:00:00 | 2024-07-15 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+|  ventas  | 2024-07-20 00:00:00 | 2024-07-20 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+|  ventas  | 2024-07-22 00:00:00 | 2024-07-22 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+|  ventas  | 2024-07-25 00:00:00 | 2024-07-28 00:00:00 |    4     | 0.5714285714285714  |   Moderado    |
+|  ventas  | 2024-07-30 00:00:00 | 2024-07-31 00:00:00 |    2     | 0.2857142857142857  |   Moderado    |
+|  ventas  | 2024-08-05 00:00:00 | 2024-08-05 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+|  ventas  | 2024-08-12 00:00:00 | 2024-08-12 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+|  ventas  | 2024-08-21 00:00:00 | 2024-08-21 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+|  ventas  | 2024-08-23 00:00:00 | 2024-08-23 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+|  ventas  | 2024-09-12 00:00:00 | 2024-09-12 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+|  ventas  | 2024-09-15 00:00:00 | 2024-09-15 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+|  ventas  | 2024-09-19 00:00:00 | 2024-09-19 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+|  ventas  | 2024-09-29 00:00:00 | 2024-09-29 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+|  ventas  | 2024-10-02 00:00:00 | 2024-10-02 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+|  ventas  | 2024-10-05 00:00:00 | 2024-10-05 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+|  ventas  | 2024-10-07 00:00:00 | 2024-10-08 00:00:00 |    2     | 0.2857142857142857  |   Moderado    |
+|  ventas  | 2024-10-11 00:00:00 | 2024-10-11 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+|  ventas  | 2024-10-14 00:00:00 | 2024-10-14 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+|  ventas  | 2024-10-20 00:00:00 | 2024-10-20 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+|  ventas  | 2024-10-24 00:00:00 | 2024-10-24 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+|  ventas  | 2024-10-29 00:00:00 | 2024-10-29 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+|  ventas  | 2024-10-31 00:00:00 | 2024-10-31 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+|  ventas  | 2024-11-05 00:00:00 | 2024-11-06 00:00:00 |    2     | 0.2857142857142857  |   Moderado    |
+|  ventas  | 2024-11-11 00:00:00 | 2024-11-11 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+|  ventas  | 2024-11-16 00:00:00 | 2024-11-16 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+|  ventas  | 2024-11-23 00:00:00 | 2024-11-23 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+|  ventas  | 2024-11-28 00:00:00 | 2024-11-28 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+|  ventas  | 2024-12-01 00:00:00 | 2024-12-05 00:00:00 |    5     | 0.7142857142857143  |   Moderado    |
+|  ventas  | 2024-12-14 00:00:00 | 2024-12-14 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+|  ventas  | 2024-12-17 00:00:00 | 2024-12-18 00:00:00 |    2     | 0.2857142857142857  |   Moderado    |
++----------+---------------------+---------------------+----------+---------------------+---------------+
+
+📌 Gaps en variable: energia_kwh
++-------------+---------------------+---------------------+----------+---------------------+---------------+
+|  Variable   |       Inicio        |         Fin         | Duración |  Ratio estacional   | Clasificación |
++-------------+---------------------+---------------------+----------+---------------------+---------------+
+| energia_kwh | 2023-01-17 00:00:00 | 2023-01-17 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| energia_kwh | 2023-01-21 00:00:00 | 2023-01-21 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| energia_kwh | 2023-03-03 00:00:00 | 2023-03-03 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| energia_kwh | 2023-03-06 00:00:00 | 2023-03-06 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| energia_kwh | 2023-03-10 00:00:00 | 2023-03-10 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| energia_kwh | 2023-03-14 00:00:00 | 2023-03-14 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| energia_kwh | 2023-03-19 00:00:00 | 2023-03-19 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| energia_kwh | 2023-03-22 00:00:00 | 2023-03-22 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| energia_kwh | 2023-03-25 00:00:00 | 2023-03-25 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| energia_kwh | 2023-04-13 00:00:00 | 2023-04-13 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| energia_kwh | 2023-04-16 00:00:00 | 2023-04-16 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| energia_kwh | 2023-05-02 00:00:00 | 2023-05-02 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| energia_kwh | 2023-06-14 00:00:00 | 2023-06-15 00:00:00 |    2     | 0.2857142857142857  |   Moderado    |
+| energia_kwh | 2023-07-04 00:00:00 | 2023-07-04 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| energia_kwh | 2023-07-31 00:00:00 | 2023-07-31 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| energia_kwh | 2023-08-17 00:00:00 | 2023-08-17 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| energia_kwh | 2023-08-19 00:00:00 | 2023-08-19 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| energia_kwh | 2023-08-26 00:00:00 | 2023-08-26 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| energia_kwh | 2023-09-25 00:00:00 | 2023-09-25 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| energia_kwh | 2023-10-10 00:00:00 | 2023-10-10 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| energia_kwh | 2023-10-27 00:00:00 | 2023-11-06 00:00:00 |    11    | 1.5714285714285714  |     Largo     |
+| energia_kwh | 2023-11-15 00:00:00 | 2023-11-15 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| energia_kwh | 2023-12-13 00:00:00 | 2023-12-13 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| energia_kwh | 2023-12-20 00:00:00 | 2023-12-20 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| energia_kwh | 2023-12-26 00:00:00 | 2023-12-26 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| energia_kwh | 2023-12-30 00:00:00 | 2023-12-31 00:00:00 |    2     | 0.2857142857142857  |   Moderado    |
+| energia_kwh | 2024-01-06 00:00:00 | 2024-01-06 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| energia_kwh | 2024-01-18 00:00:00 | 2024-01-18 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| energia_kwh | 2024-02-21 00:00:00 | 2024-02-21 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| energia_kwh | 2024-02-27 00:00:00 | 2024-02-27 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| energia_kwh | 2024-04-20 00:00:00 | 2024-04-20 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| energia_kwh | 2024-05-01 00:00:00 | 2024-05-01 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| energia_kwh | 2024-05-23 00:00:00 | 2024-05-23 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| energia_kwh | 2024-05-25 00:00:00 | 2024-05-25 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| energia_kwh | 2024-05-30 00:00:00 | 2024-05-30 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| energia_kwh | 2024-06-22 00:00:00 | 2024-06-22 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| energia_kwh | 2024-07-01 00:00:00 | 2024-07-01 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| energia_kwh | 2024-07-13 00:00:00 | 2024-07-13 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| energia_kwh | 2024-07-25 00:00:00 | 2024-07-25 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| energia_kwh | 2024-09-27 00:00:00 | 2024-09-27 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| energia_kwh | 2024-10-15 00:00:00 | 2024-10-15 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| energia_kwh | 2024-11-01 00:00:00 | 2024-11-01 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| energia_kwh | 2024-11-05 00:00:00 | 2024-11-05 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| energia_kwh | 2024-11-17 00:00:00 | 2024-11-17 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| energia_kwh | 2024-11-19 00:00:00 | 2024-11-19 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| energia_kwh | 2024-11-30 00:00:00 | 2024-11-30 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| energia_kwh | 2024-12-06 00:00:00 | 2024-12-06 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
++-------------+---------------------+---------------------+----------+---------------------+---------------+
+
+📌 Gaps en variable: sensor_A
++----------+---------------------+---------------------+----------+---------------------+---------------+
+| Variable |       Inicio        |         Fin         | Duración |  Ratio estacional   | Clasificación |
++----------+---------------------+---------------------+----------+---------------------+---------------+
+| sensor_A | 2023-01-04 00:00:00 | 2023-01-06 00:00:00 |    3     | 0.42857142857142855 |   Moderado    |
+| sensor_A | 2023-01-14 00:00:00 | 2023-01-15 00:00:00 |    2     | 0.2857142857142857  |   Moderado    |
+| sensor_A | 2023-01-28 00:00:00 | 2023-01-28 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| sensor_A | 2023-02-03 00:00:00 | 2023-02-03 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| sensor_A | 2023-02-06 00:00:00 | 2023-02-06 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| sensor_A | 2023-02-18 00:00:00 | 2023-02-18 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| sensor_A | 2023-02-22 00:00:00 | 2023-02-22 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| sensor_A | 2023-02-25 00:00:00 | 2023-02-25 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| sensor_A | 2023-03-03 00:00:00 | 2023-03-03 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| sensor_A | 2023-03-13 00:00:00 | 2023-03-13 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| sensor_A | 2023-03-19 00:00:00 | 2023-03-19 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| sensor_A | 2023-03-25 00:00:00 | 2023-03-25 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| sensor_A | 2023-03-30 00:00:00 | 2023-03-31 00:00:00 |    2     | 0.2857142857142857  |   Moderado    |
+| sensor_A | 2023-04-03 00:00:00 | 2023-04-03 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| sensor_A | 2023-04-05 00:00:00 | 2023-04-06 00:00:00 |    2     | 0.2857142857142857  |   Moderado    |
+| sensor_A | 2023-04-18 00:00:00 | 2023-04-18 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| sensor_A | 2023-04-22 00:00:00 | 2023-04-22 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| sensor_A | 2023-04-26 00:00:00 | 2023-04-26 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| sensor_A | 2023-05-05 00:00:00 | 2023-05-08 00:00:00 |    4     | 0.5714285714285714  |   Moderado    |
+| sensor_A | 2023-05-12 00:00:00 | 2023-05-12 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| sensor_A | 2023-05-25 00:00:00 | 2023-05-25 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| sensor_A | 2023-06-06 00:00:00 | 2023-06-06 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| sensor_A | 2023-06-13 00:00:00 | 2023-06-13 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| sensor_A | 2023-06-15 00:00:00 | 2023-06-15 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| sensor_A | 2023-06-18 00:00:00 | 2023-06-18 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| sensor_A | 2023-06-21 00:00:00 | 2023-06-21 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| sensor_A | 2023-06-27 00:00:00 | 2023-06-27 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| sensor_A | 2023-06-30 00:00:00 | 2023-06-30 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| sensor_A | 2023-07-02 00:00:00 | 2023-07-02 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| sensor_A | 2023-07-22 00:00:00 | 2023-07-22 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| sensor_A | 2023-07-24 00:00:00 | 2023-07-24 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| sensor_A | 2023-07-28 00:00:00 | 2023-07-28 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| sensor_A | 2023-07-30 00:00:00 | 2023-07-30 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| sensor_A | 2023-08-03 00:00:00 | 2023-08-03 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| sensor_A | 2023-08-16 00:00:00 | 2023-08-16 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| sensor_A | 2023-08-25 00:00:00 | 2023-08-25 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| sensor_A | 2023-08-27 00:00:00 | 2023-08-28 00:00:00 |    2     | 0.2857142857142857  |   Moderado    |
+| sensor_A | 2023-09-20 00:00:00 | 2023-09-20 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| sensor_A | 2023-10-03 00:00:00 | 2023-10-03 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| sensor_A | 2023-10-10 00:00:00 | 2023-10-10 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| sensor_A | 2023-10-21 00:00:00 | 2023-10-21 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| sensor_A | 2023-11-05 00:00:00 | 2023-11-06 00:00:00 |    2     | 0.2857142857142857  |   Moderado    |
+| sensor_A | 2023-11-09 00:00:00 | 2023-11-09 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| sensor_A | 2023-11-13 00:00:00 | 2023-11-13 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| sensor_A | 2023-12-15 00:00:00 | 2023-12-16 00:00:00 |    2     | 0.2857142857142857  |   Moderado    |
+| sensor_A | 2023-12-19 00:00:00 | 2023-12-19 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| sensor_A | 2023-12-24 00:00:00 | 2023-12-24 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| sensor_A | 2023-12-28 00:00:00 | 2023-12-28 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| sensor_A | 2024-01-05 00:00:00 | 2024-01-05 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| sensor_A | 2024-01-07 00:00:00 | 2024-01-08 00:00:00 |    2     | 0.2857142857142857  |   Moderado    |
+| sensor_A | 2024-01-11 00:00:00 | 2024-01-12 00:00:00 |    2     | 0.2857142857142857  |   Moderado    |
+| sensor_A | 2024-01-15 00:00:00 | 2024-01-15 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| sensor_A | 2024-01-18 00:00:00 | 2024-01-18 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| sensor_A | 2024-01-22 00:00:00 | 2024-01-22 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| sensor_A | 2024-01-27 00:00:00 | 2024-01-27 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| sensor_A | 2024-02-11 00:00:00 | 2024-02-11 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| sensor_A | 2024-02-18 00:00:00 | 2024-02-18 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| sensor_A | 2024-02-28 00:00:00 | 2024-02-28 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| sensor_A | 2024-03-01 00:00:00 | 2024-03-01 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| sensor_A | 2024-03-03 00:00:00 | 2024-03-03 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| sensor_A | 2024-03-09 00:00:00 | 2024-03-09 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| sensor_A | 2024-03-22 00:00:00 | 2024-03-22 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| sensor_A | 2024-03-27 00:00:00 | 2024-03-27 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| sensor_A | 2024-03-30 00:00:00 | 2024-03-30 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| sensor_A | 2024-04-04 00:00:00 | 2024-04-04 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| sensor_A | 2024-04-07 00:00:00 | 2024-04-07 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| sensor_A | 2024-04-11 00:00:00 | 2024-04-11 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| sensor_A | 2024-04-17 00:00:00 | 2024-04-17 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| sensor_A | 2024-04-20 00:00:00 | 2024-04-20 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| sensor_A | 2024-05-06 00:00:00 | 2024-05-06 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| sensor_A | 2024-05-11 00:00:00 | 2024-05-11 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| sensor_A | 2024-05-20 00:00:00 | 2024-05-20 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| sensor_A | 2024-05-30 00:00:00 | 2024-05-30 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| sensor_A | 2024-06-07 00:00:00 | 2024-06-07 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| sensor_A | 2024-06-14 00:00:00 | 2024-06-14 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| sensor_A | 2024-06-20 00:00:00 | 2024-06-20 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| sensor_A | 2024-06-27 00:00:00 | 2024-06-27 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| sensor_A | 2024-07-11 00:00:00 | 2024-07-11 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| sensor_A | 2024-07-28 00:00:00 | 2024-07-29 00:00:00 |    2     | 0.2857142857142857  |   Moderado    |
+| sensor_A | 2024-08-01 00:00:00 | 2024-08-01 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| sensor_A | 2024-08-07 00:00:00 | 2024-08-07 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| sensor_A | 2024-08-15 00:00:00 | 2024-08-16 00:00:00 |    2     | 0.2857142857142857  |   Moderado    |
+| sensor_A | 2024-08-18 00:00:00 | 2024-08-19 00:00:00 |    2     | 0.2857142857142857  |   Moderado    |
+| sensor_A | 2024-09-01 00:00:00 | 2024-09-01 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| sensor_A | 2024-09-04 00:00:00 | 2024-09-04 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| sensor_A | 2024-09-11 00:00:00 | 2024-09-11 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| sensor_A | 2024-09-20 00:00:00 | 2024-09-22 00:00:00 |    3     | 0.42857142857142855 |   Moderado    |
+| sensor_A | 2024-09-24 00:00:00 | 2024-09-24 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| sensor_A | 2024-09-28 00:00:00 | 2024-09-28 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| sensor_A | 2024-09-30 00:00:00 | 2024-09-30 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| sensor_A | 2024-10-08 00:00:00 | 2024-10-10 00:00:00 |    3     | 0.42857142857142855 |   Moderado    |
+| sensor_A | 2024-10-15 00:00:00 | 2024-10-15 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| sensor_A | 2024-11-08 00:00:00 | 2024-11-08 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| sensor_A | 2024-11-25 00:00:00 | 2024-11-25 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| sensor_A | 2024-12-09 00:00:00 | 2024-12-09 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| sensor_A | 2024-12-17 00:00:00 | 2024-12-17 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| sensor_A | 2024-12-25 00:00:00 | 2024-12-25 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| sensor_A | 2024-12-29 00:00:00 | 2024-12-29 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
++----------+---------------------+---------------------+----------+---------------------+---------------+
+
+📌 Gaps en variable: sensor_B
++----------+---------------------+---------------------+----------+---------------------+---------------+
+| Variable |       Inicio        |         Fin         | Duración |  Ratio estacional   | Clasificación |
++----------+---------------------+---------------------+----------+---------------------+---------------+
+| sensor_B | 2023-01-06 00:00:00 | 2023-01-06 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| sensor_B | 2023-01-18 00:00:00 | 2023-01-18 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| sensor_B | 2023-02-17 00:00:00 | 2023-02-17 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| sensor_B | 2023-03-10 00:00:00 | 2023-03-10 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| sensor_B | 2023-03-16 00:00:00 | 2023-03-16 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| sensor_B | 2023-03-27 00:00:00 | 2023-03-27 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| sensor_B | 2023-04-21 00:00:00 | 2023-04-21 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| sensor_B | 2023-05-01 00:00:00 | 2023-05-14 00:00:00 |    14    |         2.0         |     Largo     |
+| sensor_B | 2023-05-17 00:00:00 | 2023-05-17 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| sensor_B | 2023-05-30 00:00:00 | 2023-05-30 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| sensor_B | 2023-06-03 00:00:00 | 2023-06-03 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| sensor_B | 2023-07-04 00:00:00 | 2023-07-04 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| sensor_B | 2023-07-28 00:00:00 | 2023-07-28 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| sensor_B | 2023-08-05 00:00:00 | 2023-08-06 00:00:00 |    2     | 0.2857142857142857  |   Moderado    |
+| sensor_B | 2023-08-10 00:00:00 | 2023-08-10 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| sensor_B | 2023-08-13 00:00:00 | 2023-08-14 00:00:00 |    2     | 0.2857142857142857  |   Moderado    |
+| sensor_B | 2023-08-18 00:00:00 | 2023-08-18 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| sensor_B | 2023-08-22 00:00:00 | 2023-08-22 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| sensor_B | 2023-08-30 00:00:00 | 2023-08-30 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| sensor_B | 2023-09-06 00:00:00 | 2023-09-06 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| sensor_B | 2023-09-18 00:00:00 | 2023-09-18 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| sensor_B | 2023-09-23 00:00:00 | 2023-09-23 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| sensor_B | 2023-10-12 00:00:00 | 2023-10-12 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| sensor_B | 2023-11-09 00:00:00 | 2023-11-09 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| sensor_B | 2023-11-30 00:00:00 | 2023-12-01 00:00:00 |    2     | 0.2857142857142857  |   Moderado    |
+| sensor_B | 2023-12-15 00:00:00 | 2023-12-16 00:00:00 |    2     | 0.2857142857142857  |   Moderado    |
+| sensor_B | 2024-01-06 00:00:00 | 2024-01-06 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| sensor_B | 2024-01-17 00:00:00 | 2024-01-17 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| sensor_B | 2024-02-08 00:00:00 | 2024-02-08 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| sensor_B | 2024-03-01 00:00:00 | 2024-03-01 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| sensor_B | 2024-03-13 00:00:00 | 2024-03-13 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| sensor_B | 2024-03-17 00:00:00 | 2024-03-17 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| sensor_B | 2024-03-29 00:00:00 | 2024-03-29 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| sensor_B | 2024-04-09 00:00:00 | 2024-04-09 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| sensor_B | 2024-04-16 00:00:00 | 2024-04-16 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| sensor_B | 2024-04-22 00:00:00 | 2024-04-22 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| sensor_B | 2024-04-25 00:00:00 | 2024-04-25 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| sensor_B | 2024-04-28 00:00:00 | 2024-04-28 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| sensor_B | 2024-05-03 00:00:00 | 2024-05-03 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| sensor_B | 2024-06-02 00:00:00 | 2024-06-02 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| sensor_B | 2024-06-04 00:00:00 | 2024-06-24 00:00:00 |    21    |         3.0         |     Largo     |
+| sensor_B | 2024-07-06 00:00:00 | 2024-07-06 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| sensor_B | 2024-07-16 00:00:00 | 2024-07-16 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| sensor_B | 2024-07-25 00:00:00 | 2024-07-25 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| sensor_B | 2024-08-13 00:00:00 | 2024-08-14 00:00:00 |    2     | 0.2857142857142857  |   Moderado    |
+| sensor_B | 2024-08-17 00:00:00 | 2024-08-17 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| sensor_B | 2024-08-27 00:00:00 | 2024-08-27 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| sensor_B | 2024-09-01 00:00:00 | 2024-09-01 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| sensor_B | 2024-09-08 00:00:00 | 2024-09-08 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| sensor_B | 2024-09-14 00:00:00 | 2024-09-14 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| sensor_B | 2024-09-21 00:00:00 | 2024-09-21 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| sensor_B | 2024-10-06 00:00:00 | 2024-10-06 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| sensor_B | 2024-10-22 00:00:00 | 2024-10-23 00:00:00 |    2     | 0.2857142857142857  |   Moderado    |
+| sensor_B | 2024-11-06 00:00:00 | 2024-11-06 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| sensor_B | 2024-11-08 00:00:00 | 2024-11-08 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| sensor_B | 2024-12-11 00:00:00 | 2024-12-11 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
+| sensor_B | 2024-12-16 00:00:00 | 2024-12-16 00:00:00 |    1     | 0.14285714285714285 |    Pequeño    |
++----------+---------------------+---------------------+----------+---------------------+---------------+
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;temperatura&#39;:        Variable     Inicio        Fin  Duración  Ratio estacional  \
+ 0   temperatura 2023-01-15 2023-01-15         1          0.142857   
+ 1   temperatura 2023-01-21 2023-01-21         1          0.142857   
+ 2   temperatura 2023-02-23 2023-02-23         1          0.142857   
+ 3   temperatura 2023-03-03 2023-03-03         1          0.142857   
+ 4   temperatura 2023-03-06 2023-03-07         2          0.285714   
+ ..          ...        ...        ...       ...               ...   
+ 84  temperatura 2024-11-02 2024-11-02         1          0.142857   
+ 85  temperatura 2024-11-28 2024-11-28         1          0.142857   
+ 86  temperatura 2024-12-04 2024-12-04         1          0.142857   
+ 87  temperatura 2024-12-16 2024-12-16         1          0.142857   
+ 88  temperatura 2024-12-21 2024-12-22         2          0.285714   
+ 
+    Clasificación  
+ 0        Pequeño  
+ 1        Pequeño  
+ 2        Pequeño  
+ 3        Pequeño  
+ 4       Moderado  
+ ..           ...  
+ 84       Pequeño  
+ 85       Pequeño  
+ 86       Pequeño  
+ 87       Pequeño  
+ 88      Moderado  
+ 
+ [89 rows x 6 columns],
+ &#39;humedad&#39;:    Variable     Inicio        Fin  Duración  Ratio estacional  Clasificación
+ 0   humedad 2023-01-05 2023-01-05         1          0.142857        Pequeño
+ 1   humedad 2023-01-13 2023-01-14         2          0.285714       Moderado
+ 2   humedad 2023-01-19 2023-01-19         1          0.142857        Pequeño
+ 3   humedad 2023-01-29 2023-01-29         1          0.142857        Pequeño
+ 4   humedad 2023-02-01 2023-02-01         1          0.142857        Pequeño
+ ..      ...        ...        ...       ...               ...            ...
+ 92  humedad 2024-11-18 2024-11-18         1          0.142857        Pequeño
+ 93  humedad 2024-12-05 2024-12-05         1          0.142857        Pequeño
+ 94  humedad 2024-12-11 2024-12-11         1          0.142857        Pequeño
+ 95  humedad 2024-12-16 2024-12-16         1          0.142857        Pequeño
+ 96  humedad 2024-12-25 2024-12-31         7          1.000000  Significativo
+ 
+ [97 rows x 6 columns],
+ &#39;precio&#39;:    Variable     Inicio        Fin  Duración  Ratio estacional Clasificación
+ 0    precio 2023-01-06 2023-01-06         1          0.142857       Pequeño
+ 1    precio 2023-01-11 2023-01-11         1          0.142857       Pequeño
+ 2    precio 2023-02-12 2023-02-12         1          0.142857       Pequeño
+ 3    precio 2023-02-15 2023-02-15         1          0.142857       Pequeño
+ 4    precio 2023-03-13 2023-03-13         1          0.142857       Pequeño
+ ..      ...        ...        ...       ...               ...           ...
+ 58   precio 2024-11-22 2024-11-22         1          0.142857       Pequeño
+ 59   precio 2024-12-05 2024-12-05         1          0.142857       Pequeño
+ 60   precio 2024-12-12 2024-12-12         1          0.142857       Pequeño
+ 61   precio 2024-12-15 2024-12-15         1          0.142857       Pequeño
+ 62   precio 2024-12-29 2024-12-29         1          0.142857       Pequeño
+ 
+ [63 rows x 6 columns],
+ &#39;ventas&#39;:     Variable     Inicio        Fin  Duración  Ratio estacional Clasificación
+ 0     ventas 2023-01-12 2023-01-12         1          0.142857       Pequeño
+ 1     ventas 2023-01-20 2023-01-20         1          0.142857       Pequeño
+ 2     ventas 2023-01-27 2023-01-27         1          0.142857       Pequeño
+ 3     ventas 2023-02-13 2023-02-13         1          0.142857       Pequeño
+ 4     ventas 2023-02-17 2023-02-17         1          0.142857       Pequeño
+ ..       ...        ...        ...       ...               ...           ...
+ 115   ventas 2024-11-23 2024-11-23         1          0.142857       Pequeño
+ 116   ventas 2024-11-28 2024-11-28         1          0.142857       Pequeño
+ 117   ventas 2024-12-01 2024-12-05         5          0.714286      Moderado
+ 118   ventas 2024-12-14 2024-12-14         1          0.142857       Pequeño
+ 119   ventas 2024-12-17 2024-12-18         2          0.285714      Moderado
+ 
+ [120 rows x 6 columns],
+ &#39;energia_kwh&#39;:        Variable     Inicio        Fin  Duración  Ratio estacional  \
+ 0   energia_kwh 2023-01-17 2023-01-17         1          0.142857   
+ 1   energia_kwh 2023-01-21 2023-01-21         1          0.142857   
+ 2   energia_kwh 2023-03-03 2023-03-03         1          0.142857   
+ 3   energia_kwh 2023-03-06 2023-03-06         1          0.142857   
+ 4   energia_kwh 2023-03-10 2023-03-10         1          0.142857   
+ 5   energia_kwh 2023-03-14 2023-03-14         1          0.142857   
+ 6   energia_kwh 2023-03-19 2023-03-19         1          0.142857   
+ 7   energia_kwh 2023-03-22 2023-03-22         1          0.142857   
+ 8   energia_kwh 2023-03-25 2023-03-25         1          0.142857   
+ 9   energia_kwh 2023-04-13 2023-04-13         1          0.142857   
+ 10  energia_kwh 2023-04-16 2023-04-16         1          0.142857   
+ 11  energia_kwh 2023-05-02 2023-05-02         1          0.142857   
+ 12  energia_kwh 2023-06-14 2023-06-15         2          0.285714   
+ 13  energia_kwh 2023-07-04 2023-07-04         1          0.142857   
+ 14  energia_kwh 2023-07-31 2023-07-31         1          0.142857   
+ 15  energia_kwh 2023-08-17 2023-08-17         1          0.142857   
+ 16  energia_kwh 2023-08-19 2023-08-19         1          0.142857   
+ 17  energia_kwh 2023-08-26 2023-08-26         1          0.142857   
+ 18  energia_kwh 2023-09-25 2023-09-25         1          0.142857   
+ 19  energia_kwh 2023-10-10 2023-10-10         1          0.142857   
+ 20  energia_kwh 2023-10-27 2023-11-06        11          1.571429   
+ 21  energia_kwh 2023-11-15 2023-11-15         1          0.142857   
+ 22  energia_kwh 2023-12-13 2023-12-13         1          0.142857   
+ 23  energia_kwh 2023-12-20 2023-12-20         1          0.142857   
+ 24  energia_kwh 2023-12-26 2023-12-26         1          0.142857   
+ 25  energia_kwh 2023-12-30 2023-12-31         2          0.285714   
+ 26  energia_kwh 2024-01-06 2024-01-06         1          0.142857   
+ 27  energia_kwh 2024-01-18 2024-01-18         1          0.142857   
+ 28  energia_kwh 2024-02-21 2024-02-21         1          0.142857   
+ 29  energia_kwh 2024-02-27 2024-02-27         1          0.142857   
+ 30  energia_kwh 2024-04-20 2024-04-20         1          0.142857   
+ 31  energia_kwh 2024-05-01 2024-05-01         1          0.142857   
+ 32  energia_kwh 2024-05-23 2024-05-23         1          0.142857   
+ 33  energia_kwh 2024-05-25 2024-05-25         1          0.142857   
+ 34  energia_kwh 2024-05-30 2024-05-30         1          0.142857   
+ 35  energia_kwh 2024-06-22 2024-06-22         1          0.142857   
+ 36  energia_kwh 2024-07-01 2024-07-01         1          0.142857   
+ 37  energia_kwh 2024-07-13 2024-07-13         1          0.142857   
+ 38  energia_kwh 2024-07-25 2024-07-25         1          0.142857   
+ 39  energia_kwh 2024-09-27 2024-09-27         1          0.142857   
+ 40  energia_kwh 2024-10-15 2024-10-15         1          0.142857   
+ 41  energia_kwh 2024-11-01 2024-11-01         1          0.142857   
+ 42  energia_kwh 2024-11-05 2024-11-05         1          0.142857   
+ 43  energia_kwh 2024-11-17 2024-11-17         1          0.142857   
+ 44  energia_kwh 2024-11-19 2024-11-19         1          0.142857   
+ 45  energia_kwh 2024-11-30 2024-11-30         1          0.142857   
+ 46  energia_kwh 2024-12-06 2024-12-06         1          0.142857   
+ 
+    Clasificación  
+ 0        Pequeño  
+ 1        Pequeño  
+ 2        Pequeño  
+ 3        Pequeño  
+ 4        Pequeño  
+ 5        Pequeño  
+ 6        Pequeño  
+ 7        Pequeño  
+ 8        Pequeño  
+ 9        Pequeño  
+ 10       Pequeño  
+ 11       Pequeño  
+ 12      Moderado  
+ 13       Pequeño  
+ 14       Pequeño  
+ 15       Pequeño  
+ 16       Pequeño  
+ 17       Pequeño  
+ 18       Pequeño  
+ 19       Pequeño  
+ 20         Largo  
+ 21       Pequeño  
+ 22       Pequeño  
+ 23       Pequeño  
+ 24       Pequeño  
+ 25      Moderado  
+ 26       Pequeño  
+ 27       Pequeño  
+ 28       Pequeño  
+ 29       Pequeño  
+ 30       Pequeño  
+ 31       Pequeño  
+ 32       Pequeño  
+ 33       Pequeño  
+ 34       Pequeño  
+ 35       Pequeño  
+ 36       Pequeño  
+ 37       Pequeño  
+ 38       Pequeño  
+ 39       Pequeño  
+ 40       Pequeño  
+ 41       Pequeño  
+ 42       Pequeño  
+ 43       Pequeño  
+ 44       Pequeño  
+ 45       Pequeño  
+ 46       Pequeño  ,
+ &#39;sensor_A&#39;:     Variable     Inicio        Fin  Duración  Ratio estacional Clasificación
+ 0   sensor_A 2023-01-04 2023-01-06         3          0.428571      Moderado
+ 1   sensor_A 2023-01-14 2023-01-15         2          0.285714      Moderado
+ 2   sensor_A 2023-01-28 2023-01-28         1          0.142857       Pequeño
+ 3   sensor_A 2023-02-03 2023-02-03         1          0.142857       Pequeño
+ 4   sensor_A 2023-02-06 2023-02-06         1          0.142857       Pequeño
+ ..       ...        ...        ...       ...               ...           ...
+ 93  sensor_A 2024-11-25 2024-11-25         1          0.142857       Pequeño
+ 94  sensor_A 2024-12-09 2024-12-09         1          0.142857       Pequeño
+ 95  sensor_A 2024-12-17 2024-12-17         1          0.142857       Pequeño
+ 96  sensor_A 2024-12-25 2024-12-25         1          0.142857       Pequeño
+ 97  sensor_A 2024-12-29 2024-12-29         1          0.142857       Pequeño
+ 
+ [98 rows x 6 columns],
+ &#39;sensor_B&#39;:     Variable     Inicio        Fin  Duración  Ratio estacional Clasificación
+ 0   sensor_B 2023-01-06 2023-01-06         1          0.142857       Pequeño
+ 1   sensor_B 2023-01-18 2023-01-18         1          0.142857       Pequeño
+ 2   sensor_B 2023-02-17 2023-02-17         1          0.142857       Pequeño
+ 3   sensor_B 2023-03-10 2023-03-10         1          0.142857       Pequeño
+ 4   sensor_B 2023-03-16 2023-03-16         1          0.142857       Pequeño
+ 5   sensor_B 2023-03-27 2023-03-27         1          0.142857       Pequeño
+ 6   sensor_B 2023-04-21 2023-04-21         1          0.142857       Pequeño
+ 7   sensor_B 2023-05-01 2023-05-14        14          2.000000         Largo
+ 8   sensor_B 2023-05-17 2023-05-17         1          0.142857       Pequeño
+ 9   sensor_B 2023-05-30 2023-05-30         1          0.142857       Pequeño
+ 10  sensor_B 2023-06-03 2023-06-03         1          0.142857       Pequeño
+ 11  sensor_B 2023-07-04 2023-07-04         1          0.142857       Pequeño
+ 12  sensor_B 2023-07-28 2023-07-28         1          0.142857       Pequeño
+ 13  sensor_B 2023-08-05 2023-08-06         2          0.285714      Moderado
+ 14  sensor_B 2023-08-10 2023-08-10         1          0.142857       Pequeño
+ 15  sensor_B 2023-08-13 2023-08-14         2          0.285714      Moderado
+ 16  sensor_B 2023-08-18 2023-08-18         1          0.142857       Pequeño
+ 17  sensor_B 2023-08-22 2023-08-22         1          0.142857       Pequeño
+ 18  sensor_B 2023-08-30 2023-08-30         1          0.142857       Pequeño
+ 19  sensor_B 2023-09-06 2023-09-06         1          0.142857       Pequeño
+ 20  sensor_B 2023-09-18 2023-09-18         1          0.142857       Pequeño
+ 21  sensor_B 2023-09-23 2023-09-23         1          0.142857       Pequeño
+ 22  sensor_B 2023-10-12 2023-10-12         1          0.142857       Pequeño
+ 23  sensor_B 2023-11-09 2023-11-09         1          0.142857       Pequeño
+ 24  sensor_B 2023-11-30 2023-12-01         2          0.285714      Moderado
+ 25  sensor_B 2023-12-15 2023-12-16         2          0.285714      Moderado
+ 26  sensor_B 2024-01-06 2024-01-06         1          0.142857       Pequeño
+ 27  sensor_B 2024-01-17 2024-01-17         1          0.142857       Pequeño
+ 28  sensor_B 2024-02-08 2024-02-08         1          0.142857       Pequeño
+ 29  sensor_B 2024-03-01 2024-03-01         1          0.142857       Pequeño
+ 30  sensor_B 2024-03-13 2024-03-13         1          0.142857       Pequeño
+ 31  sensor_B 2024-03-17 2024-03-17         1          0.142857       Pequeño
+ 32  sensor_B 2024-03-29 2024-03-29         1          0.142857       Pequeño
+ 33  sensor_B 2024-04-09 2024-04-09         1          0.142857       Pequeño
+ 34  sensor_B 2024-04-16 2024-04-16         1          0.142857       Pequeño
+ 35  sensor_B 2024-04-22 2024-04-22         1          0.142857       Pequeño
+ 36  sensor_B 2024-04-25 2024-04-25         1          0.142857       Pequeño
+ 37  sensor_B 2024-04-28 2024-04-28         1          0.142857       Pequeño
+ 38  sensor_B 2024-05-03 2024-05-03         1          0.142857       Pequeño
+ 39  sensor_B 2024-06-02 2024-06-02         1          0.142857       Pequeño
+ 40  sensor_B 2024-06-04 2024-06-24        21          3.000000         Largo
+ 41  sensor_B 2024-07-06 2024-07-06         1          0.142857       Pequeño
+ 42  sensor_B 2024-07-16 2024-07-16         1          0.142857       Pequeño
+ 43  sensor_B 2024-07-25 2024-07-25         1          0.142857       Pequeño
+ 44  sensor_B 2024-08-13 2024-08-14         2          0.285714      Moderado
+ 45  sensor_B 2024-08-17 2024-08-17         1          0.142857       Pequeño
+ 46  sensor_B 2024-08-27 2024-08-27         1          0.142857       Pequeño
+ 47  sensor_B 2024-09-01 2024-09-01         1          0.142857       Pequeño
+ 48  sensor_B 2024-09-08 2024-09-08         1          0.142857       Pequeño
+ 49  sensor_B 2024-09-14 2024-09-14         1          0.142857       Pequeño
+ 50  sensor_B 2024-09-21 2024-09-21         1          0.142857       Pequeño
+ 51  sensor_B 2024-10-06 2024-10-06         1          0.142857       Pequeño
+ 52  sensor_B 2024-10-22 2024-10-23         2          0.285714      Moderado
+ 53  sensor_B 2024-11-06 2024-11-06         1          0.142857       Pequeño
+ 54  sensor_B 2024-11-08 2024-11-08         1          0.142857       Pequeño
+ 55  sensor_B 2024-12-11 2024-12-11         1          0.142857       Pequeño
+ 56  sensor_B 2024-12-16 2024-12-16         1          0.142857       Pequeño}
+</pre></div>
+</div>
+</div>
+</div>
 </section>
 <section id="tratamiento-de-datos-faltantes">
 <h2>Tratamiento de datos faltantes<a class="headerlink" href="#tratamiento-de-datos-faltantes" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s2">&quot;fecha&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">sort_index</span><span class="p">()</span>
+
+<span class="c1"># a) Forward fill (lleva hacia adelante el último valor observado)</span>
+<span class="n">df_ffill</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s2">&quot;ffill&quot;</span><span class="p">)</span>
+
+<span class="c1"># b) Backward fill (lleva hacia atrás el siguiente valor observado)</span>
+<span class="n">df_bfill</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s2">&quot;bfill&quot;</span><span class="p">)</span>
+
+<span class="c1"># c) Interpolación lineal (buena para datos numéricos como temperatura, energía, etc.)</span>
+<span class="n">df_interp</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">interpolate</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s2">&quot;linear&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\migue\AppData\Local\Temp\ipykernel_19556\2428954663.py:4: FutureWarning: DataFrame.fillna with &#39;method&#39; is deprecated and will raise in a future version. Use obj.ffill() or obj.bfill() instead.
+  df_ffill = df.fillna(method=&quot;ffill&quot;)
+C:\Users\migue\AppData\Local\Temp\ipykernel_19556\2428954663.py:7: FutureWarning: DataFrame.fillna with &#39;method&#39; is deprecated and will raise in a future version. Use obj.ffill() or obj.bfill() instead.
+  df_bfill = df.fillna(method=&quot;bfill&quot;)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Interpolación con método de tiempo (mejor si el índice es datetime)</span>
+<span class="n">df_time_interp</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">interpolate</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s2">&quot;time&quot;</span><span class="p">)</span>
+
+<span class="c1"># Interpolación polinómica (para suavizar tendencias curvas)</span>
+<span class="n">df_poly</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">interpolate</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s2">&quot;polynomial&quot;</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
 </section>
 <section id="verificacion-final-de-los-datos">
 <h2>verificacion final de los datos<a class="headerlink" href="#verificacion-final-de-los-datos" title="Link to this heading">#</a></h2>
-</section>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">eda</span><span class="p">(</span><span class="n">df_ffill</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Hoja: data
+
+Resumen:
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Cantidad de filas</th>
+      <th>Cantidad de columnas</th>
+      <th>Datos faltantes</th>
+      <th>Filas duplicadas</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Resumen</th>
+      <td>731</td>
+      <td>8</td>
+      <td>9</td>
+      <td>0</td>
+    </tr>
+  </tbody>
+</table>
+</div></div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Encabezado:
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>temperatura</th>
+      <th>humedad</th>
+      <th>lluvia_mm</th>
+      <th>precio</th>
+      <th>ventas</th>
+      <th>energia_kwh</th>
+      <th>sensor_A</th>
+      <th>sensor_B</th>
+    </tr>
+    <tr>
+      <th>fecha</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2023-01-01</th>
+      <td>NaN</td>
+      <td>60.67</td>
+      <td>0.00</td>
+      <td>99.68</td>
+      <td>527.2</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>51.647</td>
+    </tr>
+    <tr>
+      <th>2023-01-02</th>
+      <td>NaN</td>
+      <td>48.96</td>
+      <td>0.00</td>
+      <td>100.50</td>
+      <td>493.7</td>
+      <td>120.04</td>
+      <td>50.476</td>
+      <td>48.778</td>
+    </tr>
+    <tr>
+      <th>2023-01-03</th>
+      <td>NaN</td>
+      <td>48.73</td>
+      <td>0.00</td>
+      <td>100.86</td>
+      <td>487.7</td>
+      <td>119.11</td>
+      <td>52.349</td>
+      <td>48.953</td>
+    </tr>
+    <tr>
+      <th>2023-01-04</th>
+      <td>NaN</td>
+      <td>57.13</td>
+      <td>0.00</td>
+      <td>101.74</td>
+      <td>512.8</td>
+      <td>120.71</td>
+      <td>52.349</td>
+      <td>49.383</td>
+    </tr>
+    <tr>
+      <th>2023-01-05</th>
+      <td>NaN</td>
+      <td>57.13</td>
+      <td>2.79</td>
+      <td>101.77</td>
+      <td>477.4</td>
+      <td>119.39</td>
+      <td>52.349</td>
+      <td>46.964</td>
+    </tr>
+  </tbody>
+</table>
+</div></div><img alt="_images/fab9f471c2e72e9d5319804598e2fc5a7fd3abd44521078506350d4c86314d74.png" src="_images/fab9f471c2e72e9d5319804598e2fc5a7fd3abd44521078506350d4c86314d74.png" />
+<img alt="_images/653d253335bc7288096ce08fca71a2fda1ce2dab167dddbf66604153de7e4c5b.png" src="_images/653d253335bc7288096ce08fca71a2fda1ce2dab167dddbf66604153de7e4c5b.png" />
+<img alt="_images/191b5544707012fdb890fbb3d48958044d5615990c24268ee89a0ba1f87d1957.png" src="_images/191b5544707012fdb890fbb3d48958044d5615990c24268ee89a0ba1f87d1957.png" />
+<img alt="_images/ed2b8641b672ae4011617c3393c761e44674e1a924edc7fe2ddac1c64a95955b.png" src="_images/ed2b8641b672ae4011617c3393c761e44674e1a924edc7fe2ddac1c64a95955b.png" />
+<img alt="_images/262fd09c757b116706b39e69dc6cad51a64dade13d39073d7ad73217b30e783e.png" src="_images/262fd09c757b116706b39e69dc6cad51a64dade13d39073d7ad73217b30e783e.png" />
+<img alt="_images/6ede9b7a675ad898723642b97092f8ec73648f92a80c169c6342c70076297a5b.png" src="_images/6ede9b7a675ad898723642b97092f8ec73648f92a80c169c6342c70076297a5b.png" />
+<img alt="_images/421fdfba962b564ce682d71d39c638d65ada57023c067041d7ca7a22e5af3c8e.png" src="_images/421fdfba962b564ce682d71d39c638d65ada57023c067041d7ca7a22e5af3c8e.png" />
+<img alt="_images/bb7439fd926a34d6ef5f7089b7f9474e7e6f50d280359f480a748b76726b5b41.png" src="_images/bb7439fd926a34d6ef5f7089b7f9474e7e6f50d280359f480a748b76726b5b41.png" />
+<img alt="_images/1449d97183973016c3d00eb82b4b772449763ea22ae53160201982067b3a925f.png" src="_images/1449d97183973016c3d00eb82b4b772449763ea22ae53160201982067b3a925f.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">eda</span><span class="p">(</span><span class="n">df_bfill</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Hoja: data
+
+Resumen:
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Cantidad de filas</th>
+      <th>Cantidad de columnas</th>
+      <th>Datos faltantes</th>
+      <th>Filas duplicadas</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Resumen</th>
+      <td>731</td>
+      <td>8</td>
+      <td>7</td>
+      <td>0</td>
+    </tr>
+  </tbody>
+</table>
+</div></div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Encabezado:
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>temperatura</th>
+      <th>humedad</th>
+      <th>lluvia_mm</th>
+      <th>precio</th>
+      <th>ventas</th>
+      <th>energia_kwh</th>
+      <th>sensor_A</th>
+      <th>sensor_B</th>
+    </tr>
+    <tr>
+      <th>fecha</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2023-01-01</th>
+      <td>21.38</td>
+      <td>60.67</td>
+      <td>0.00</td>
+      <td>99.68</td>
+      <td>527.2</td>
+      <td>120.04</td>
+      <td>50.476</td>
+      <td>51.647</td>
+    </tr>
+    <tr>
+      <th>2023-01-02</th>
+      <td>21.38</td>
+      <td>48.96</td>
+      <td>0.00</td>
+      <td>100.50</td>
+      <td>493.7</td>
+      <td>120.04</td>
+      <td>50.476</td>
+      <td>48.778</td>
+    </tr>
+    <tr>
+      <th>2023-01-03</th>
+      <td>21.38</td>
+      <td>48.73</td>
+      <td>0.00</td>
+      <td>100.86</td>
+      <td>487.7</td>
+      <td>119.11</td>
+      <td>52.349</td>
+      <td>48.953</td>
+    </tr>
+    <tr>
+      <th>2023-01-04</th>
+      <td>21.38</td>
+      <td>57.13</td>
+      <td>0.00</td>
+      <td>101.74</td>
+      <td>512.8</td>
+      <td>120.71</td>
+      <td>50.400</td>
+      <td>49.383</td>
+    </tr>
+    <tr>
+      <th>2023-01-05</th>
+      <td>21.38</td>
+      <td>55.49</td>
+      <td>2.79</td>
+      <td>101.77</td>
+      <td>477.4</td>
+      <td>119.39</td>
+      <td>50.400</td>
+      <td>46.964</td>
+    </tr>
+  </tbody>
+</table>
+</div></div><img alt="_images/f4d92d6cddb882b97561a52d6373ff04d293adf6fbf33e02550f00e19b937134.png" src="_images/f4d92d6cddb882b97561a52d6373ff04d293adf6fbf33e02550f00e19b937134.png" />
+<img alt="_images/5109c77fc28b08877f680aff3526a78a9e39c6c1f4e7e63dc91866ea998ff6d4.png" src="_images/5109c77fc28b08877f680aff3526a78a9e39c6c1f4e7e63dc91866ea998ff6d4.png" />
+<img alt="_images/191b5544707012fdb890fbb3d48958044d5615990c24268ee89a0ba1f87d1957.png" src="_images/191b5544707012fdb890fbb3d48958044d5615990c24268ee89a0ba1f87d1957.png" />
+<img alt="_images/aee4f02d7935cd4f56f66433f5a83d6be3d07430d698d21136641b1e7c24436d.png" src="_images/aee4f02d7935cd4f56f66433f5a83d6be3d07430d698d21136641b1e7c24436d.png" />
+<img alt="_images/4ca59b4c5fbf6aea9e2b8a1cca48259360928cbfda2e134888e5cc250b382cb8.png" src="_images/4ca59b4c5fbf6aea9e2b8a1cca48259360928cbfda2e134888e5cc250b382cb8.png" />
+<img alt="_images/7e4db6ed3d62ab616ed2bc62303eb284b9c8a0e74180a483d85549dacf8b5637.png" src="_images/7e4db6ed3d62ab616ed2bc62303eb284b9c8a0e74180a483d85549dacf8b5637.png" />
+<img alt="_images/333312dad4f1428ec4cf47d03686ab990d490a9e2e06baf7cfd8b16d9ade602e.png" src="_images/333312dad4f1428ec4cf47d03686ab990d490a9e2e06baf7cfd8b16d9ade602e.png" />
+<img alt="_images/ab394f819a020776879aadc4409eca964a743f4add4ca7bd973e4143cf68ba94.png" src="_images/ab394f819a020776879aadc4409eca964a743f4add4ca7bd973e4143cf68ba94.png" />
+<img alt="_images/ca768eaa55d1a9f0304cc61da76567ed2920d344d6919c4210c6ac5ece723f27.png" src="_images/ca768eaa55d1a9f0304cc61da76567ed2920d344d6919c4210c6ac5ece723f27.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">eda</span><span class="p">(</span><span class="n">df_interp</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Hoja: data
+
+Resumen:
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Cantidad de filas</th>
+      <th>Cantidad de columnas</th>
+      <th>Datos faltantes</th>
+      <th>Filas duplicadas</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Resumen</th>
+      <td>731</td>
+      <td>8</td>
+      <td>9</td>
+      <td>0</td>
+    </tr>
+  </tbody>
+</table>
+</div></div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Encabezado:
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>temperatura</th>
+      <th>humedad</th>
+      <th>lluvia_mm</th>
+      <th>precio</th>
+      <th>ventas</th>
+      <th>energia_kwh</th>
+      <th>sensor_A</th>
+      <th>sensor_B</th>
+    </tr>
+    <tr>
+      <th>fecha</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2023-01-01</th>
+      <td>NaN</td>
+      <td>60.67</td>
+      <td>0.00</td>
+      <td>99.68</td>
+      <td>527.2</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>51.647</td>
+    </tr>
+    <tr>
+      <th>2023-01-02</th>
+      <td>NaN</td>
+      <td>48.96</td>
+      <td>0.00</td>
+      <td>100.50</td>
+      <td>493.7</td>
+      <td>120.04</td>
+      <td>50.47600</td>
+      <td>48.778</td>
+    </tr>
+    <tr>
+      <th>2023-01-03</th>
+      <td>NaN</td>
+      <td>48.73</td>
+      <td>0.00</td>
+      <td>100.86</td>
+      <td>487.7</td>
+      <td>119.11</td>
+      <td>52.34900</td>
+      <td>48.953</td>
+    </tr>
+    <tr>
+      <th>2023-01-04</th>
+      <td>NaN</td>
+      <td>57.13</td>
+      <td>0.00</td>
+      <td>101.74</td>
+      <td>512.8</td>
+      <td>120.71</td>
+      <td>51.86175</td>
+      <td>49.383</td>
+    </tr>
+    <tr>
+      <th>2023-01-05</th>
+      <td>NaN</td>
+      <td>56.31</td>
+      <td>2.79</td>
+      <td>101.77</td>
+      <td>477.4</td>
+      <td>119.39</td>
+      <td>51.37450</td>
+      <td>46.964</td>
+    </tr>
+  </tbody>
+</table>
+</div></div><img alt="_images/730100ffeaf99163ba0ada9dcb68bcfb31db112d86a673cb5668eceb085184be.png" src="_images/730100ffeaf99163ba0ada9dcb68bcfb31db112d86a673cb5668eceb085184be.png" />
+<img alt="_images/aa928630bf6a3c902ad5725f356ecf98233bdbdbd6284afdee35dbd6330274a7.png" src="_images/aa928630bf6a3c902ad5725f356ecf98233bdbdbd6284afdee35dbd6330274a7.png" />
+<img alt="_images/191b5544707012fdb890fbb3d48958044d5615990c24268ee89a0ba1f87d1957.png" src="_images/191b5544707012fdb890fbb3d48958044d5615990c24268ee89a0ba1f87d1957.png" />
+<img alt="_images/45f679069d00f87c38b2c977d64314d27969fbd9710bec1964da3b8fba1c45c1.png" src="_images/45f679069d00f87c38b2c977d64314d27969fbd9710bec1964da3b8fba1c45c1.png" />
+<img alt="_images/cd5e26afa2e60ec568afb9e972472c03429df2936c33c28ee32b13730b3f374d.png" src="_images/cd5e26afa2e60ec568afb9e972472c03429df2936c33c28ee32b13730b3f374d.png" />
+<img alt="_images/dde1c9b8d4dcee3f390d2e2a2d833945332973de9bbec7c11b0bd7377d1603a9.png" src="_images/dde1c9b8d4dcee3f390d2e2a2d833945332973de9bbec7c11b0bd7377d1603a9.png" />
+<img alt="_images/2f03a74552ba1fad20ef552013dae8c7a26632e4fce93c944c9934127ce8c0c2.png" src="_images/2f03a74552ba1fad20ef552013dae8c7a26632e4fce93c944c9934127ce8c0c2.png" />
+<img alt="_images/cab6586b7a3f457f7f301596094d4ad95ea095fc69c44cc1e8fead6173a0c0b8.png" src="_images/cab6586b7a3f457f7f301596094d4ad95ea095fc69c44cc1e8fead6173a0c0b8.png" />
+<img alt="_images/1449d97183973016c3d00eb82b4b772449763ea22ae53160201982067b3a925f.png" src="_images/1449d97183973016c3d00eb82b4b772449763ea22ae53160201982067b3a925f.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">eda</span><span class="p">(</span><span class="n">df_time_interp</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Hoja: data
+
+Resumen:
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Cantidad de filas</th>
+      <th>Cantidad de columnas</th>
+      <th>Datos faltantes</th>
+      <th>Filas duplicadas</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Resumen</th>
+      <td>731</td>
+      <td>8</td>
+      <td>9</td>
+      <td>0</td>
+    </tr>
+  </tbody>
+</table>
+</div></div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Encabezado:
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>temperatura</th>
+      <th>humedad</th>
+      <th>lluvia_mm</th>
+      <th>precio</th>
+      <th>ventas</th>
+      <th>energia_kwh</th>
+      <th>sensor_A</th>
+      <th>sensor_B</th>
+    </tr>
+    <tr>
+      <th>fecha</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2023-01-01</th>
+      <td>NaN</td>
+      <td>60.67</td>
+      <td>0.00</td>
+      <td>99.68</td>
+      <td>527.2</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>51.647</td>
+    </tr>
+    <tr>
+      <th>2023-01-02</th>
+      <td>NaN</td>
+      <td>48.96</td>
+      <td>0.00</td>
+      <td>100.50</td>
+      <td>493.7</td>
+      <td>120.04</td>
+      <td>50.47600</td>
+      <td>48.778</td>
+    </tr>
+    <tr>
+      <th>2023-01-03</th>
+      <td>NaN</td>
+      <td>48.73</td>
+      <td>0.00</td>
+      <td>100.86</td>
+      <td>487.7</td>
+      <td>119.11</td>
+      <td>52.34900</td>
+      <td>48.953</td>
+    </tr>
+    <tr>
+      <th>2023-01-04</th>
+      <td>NaN</td>
+      <td>57.13</td>
+      <td>0.00</td>
+      <td>101.74</td>
+      <td>512.8</td>
+      <td>120.71</td>
+      <td>51.86175</td>
+      <td>49.383</td>
+    </tr>
+    <tr>
+      <th>2023-01-05</th>
+      <td>NaN</td>
+      <td>56.31</td>
+      <td>2.79</td>
+      <td>101.77</td>
+      <td>477.4</td>
+      <td>119.39</td>
+      <td>51.37450</td>
+      <td>46.964</td>
+    </tr>
+  </tbody>
+</table>
+</div></div><img alt="_images/730100ffeaf99163ba0ada9dcb68bcfb31db112d86a673cb5668eceb085184be.png" src="_images/730100ffeaf99163ba0ada9dcb68bcfb31db112d86a673cb5668eceb085184be.png" />
+<img alt="_images/aa928630bf6a3c902ad5725f356ecf98233bdbdbd6284afdee35dbd6330274a7.png" src="_images/aa928630bf6a3c902ad5725f356ecf98233bdbdbd6284afdee35dbd6330274a7.png" />
+<img alt="_images/191b5544707012fdb890fbb3d48958044d5615990c24268ee89a0ba1f87d1957.png" src="_images/191b5544707012fdb890fbb3d48958044d5615990c24268ee89a0ba1f87d1957.png" />
+<img alt="_images/45f679069d00f87c38b2c977d64314d27969fbd9710bec1964da3b8fba1c45c1.png" src="_images/45f679069d00f87c38b2c977d64314d27969fbd9710bec1964da3b8fba1c45c1.png" />
+<img alt="_images/cd5e26afa2e60ec568afb9e972472c03429df2936c33c28ee32b13730b3f374d.png" src="_images/cd5e26afa2e60ec568afb9e972472c03429df2936c33c28ee32b13730b3f374d.png" />
+<img alt="_images/dde1c9b8d4dcee3f390d2e2a2d833945332973de9bbec7c11b0bd7377d1603a9.png" src="_images/dde1c9b8d4dcee3f390d2e2a2d833945332973de9bbec7c11b0bd7377d1603a9.png" />
+<img alt="_images/2f03a74552ba1fad20ef552013dae8c7a26632e4fce93c944c9934127ce8c0c2.png" src="_images/2f03a74552ba1fad20ef552013dae8c7a26632e4fce93c944c9934127ce8c0c2.png" />
+<img alt="_images/cab6586b7a3f457f7f301596094d4ad95ea095fc69c44cc1e8fead6173a0c0b8.png" src="_images/cab6586b7a3f457f7f301596094d4ad95ea095fc69c44cc1e8fead6173a0c0b8.png" />
+<img alt="_images/1449d97183973016c3d00eb82b4b772449763ea22ae53160201982067b3a925f.png" src="_images/1449d97183973016c3d00eb82b4b772449763ea22ae53160201982067b3a925f.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">eda</span><span class="p">(</span><span class="n">df_poly</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Hoja: data
+
+Resumen:
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Cantidad de filas</th>
+      <th>Cantidad de columnas</th>
+      <th>Datos faltantes</th>
+      <th>Filas duplicadas</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Resumen</th>
+      <td>731</td>
+      <td>8</td>
+      <td>16</td>
+      <td>0</td>
+    </tr>
+  </tbody>
+</table>
+</div></div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Encabezado:
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>temperatura</th>
+      <th>humedad</th>
+      <th>lluvia_mm</th>
+      <th>precio</th>
+      <th>ventas</th>
+      <th>energia_kwh</th>
+      <th>sensor_A</th>
+      <th>sensor_B</th>
+    </tr>
+    <tr>
+      <th>fecha</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2023-01-01</th>
+      <td>NaN</td>
+      <td>60.670000</td>
+      <td>0.00</td>
+      <td>99.68</td>
+      <td>527.2</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>51.647</td>
+    </tr>
+    <tr>
+      <th>2023-01-02</th>
+      <td>NaN</td>
+      <td>48.960000</td>
+      <td>0.00</td>
+      <td>100.50</td>
+      <td>493.7</td>
+      <td>120.04</td>
+      <td>50.476000</td>
+      <td>48.778</td>
+    </tr>
+    <tr>
+      <th>2023-01-03</th>
+      <td>NaN</td>
+      <td>48.730000</td>
+      <td>0.00</td>
+      <td>100.86</td>
+      <td>487.7</td>
+      <td>119.11</td>
+      <td>52.349000</td>
+      <td>48.953</td>
+    </tr>
+    <tr>
+      <th>2023-01-04</th>
+      <td>NaN</td>
+      <td>57.130000</td>
+      <td>0.00</td>
+      <td>101.74</td>
+      <td>512.8</td>
+      <td>120.71</td>
+      <td>53.118966</td>
+      <td>49.383</td>
+    </tr>
+    <tr>
+      <th>2023-01-05</th>
+      <td>NaN</td>
+      <td>58.293464</td>
+      <td>2.79</td>
+      <td>101.77</td>
+      <td>477.4</td>
+      <td>119.39</td>
+      <td>52.785899</td>
+      <td>46.964</td>
+    </tr>
+  </tbody>
+</table>
+</div></div><img alt="_images/e0a614ac80efd73b65f59d12834a89910d96b0cb9f13d22ad3f3ecf56d9561d5.png" src="_images/e0a614ac80efd73b65f59d12834a89910d96b0cb9f13d22ad3f3ecf56d9561d5.png" />
+<img alt="_images/386b6b172cc3e956bc186398abe3c73fd6f6978c755a9b7fe175d711686fb521.png" src="_images/386b6b172cc3e956bc186398abe3c73fd6f6978c755a9b7fe175d711686fb521.png" />
+<img alt="_images/191b5544707012fdb890fbb3d48958044d5615990c24268ee89a0ba1f87d1957.png" src="_images/191b5544707012fdb890fbb3d48958044d5615990c24268ee89a0ba1f87d1957.png" />
+<img alt="_images/c9e2537195e3ed3d55aef712db1d273e32b70ed01bad5957adf98d22d101c7b0.png" src="_images/c9e2537195e3ed3d55aef712db1d273e32b70ed01bad5957adf98d22d101c7b0.png" />
+<img alt="_images/b868fcebeca5045fcc7607c1fdb6c8ca09301987cfd818f547aab5212507cf73.png" src="_images/b868fcebeca5045fcc7607c1fdb6c8ca09301987cfd818f547aab5212507cf73.png" />
+<img alt="_images/f76e5bbbd66ef50d1e1281c9f0215dd90ed892b886c7349b7f9ce8266cfba7a3.png" src="_images/f76e5bbbd66ef50d1e1281c9f0215dd90ed892b886c7349b7f9ce8266cfba7a3.png" />
+<img alt="_images/b409931efbe0f6fb9ca0d9fa350da0798b99c9dc101979541450e7b14d46a8b3.png" src="_images/b409931efbe0f6fb9ca0d9fa350da0798b99c9dc101979541450e7b14d46a8b3.png" />
+<img alt="_images/08d57d85d7ab357b29df99751d63f2e2bb812645c784bf3ca59e5e873da2b6e3.png" src="_images/08d57d85d7ab357b29df99751d63f2e2bb812645c784bf3ca59e5e873da2b6e3.png" />
+<img alt="_images/7a1ce31460b6e8ecc4040b887cb2a640d1c0ede4067a5821d8e9017360140726.png" src="_images/7a1ce31460b6e8ecc4040b887cb2a640d1c0ede4067a5821d8e9017360140726.png" />
+</div>
+</div>
 <section id="id1">
-<h2><a class="headerlink" href="#id1" title="Link to this heading">#</a></h2>
+<h3><a class="headerlink" href="#id1" title="Link to this heading">#</a></h3>
+</section>
 </section>
 </section>
 
@@ -1134,8 +3089,10 @@ dtype: int64
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-exploratorio-de-datos-eda">Analisis Exploratorio de datos(EDA)</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#clasificacion-de-datos-faltantes">Clasificacion de datos faltantes</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tratamiento-de-datos-faltantes">Tratamiento de datos faltantes</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#verificacion-final-de-los-datos">verificacion final de los datos</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1"></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#verificacion-final-de-los-datos">verificacion final de los datos</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1"></a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
